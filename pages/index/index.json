@@ -1,3 +1,6 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "navbar": "../../components/navbar/index",
+    "search": "../../components/search/index"
+  }
 }
