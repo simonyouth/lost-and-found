@@ -1,0 +1,9 @@
+.nav-cage {
+   position: fixed;
+    width: 100%;
+    height: 45rpx;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+    z-index: 99999;
+}

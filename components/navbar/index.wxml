@@ -1,0 +1,3 @@
+<view class='nav-cage' style="margin-top: {{statusBarHeight}}px">
+  <slot></slot>
+</view>
