@@ -24,3 +24,10 @@
   font-family: 'iconfont' !important;
   font-size: 16px;
 }
+
+.top-bar {
+  position: fixed;
+  width: 100%;
+  padding: 10rpx 5rpx;
+  border: 1px #e2e2e2 solid;
+}

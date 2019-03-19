@@ -1,15 +1,8 @@
-<navbar status-bar-height="{{statusBarHeight}}">
-<search></search>
-</navbar>
-<view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
-  </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
-  </view>
+<view class='top-bar'>
+  <view class="lost title {{activeIndex === 1 ? 'actived' : ''}}" bindtap='changeSorter' data-active-index="1">失物贴</view>
+  <view class="found title {{activeIndex === 2 ? 'actived' : ''}}" bindtap='changeSorter' data-active-index="2">寻物贴</view>
 </view>
+<view class='find'>
+ <text>定位\n查找</text>
+</view>
+

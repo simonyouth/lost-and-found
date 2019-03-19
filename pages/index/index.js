@@ -4,16 +4,13 @@ const app = getApp()
 
 Page({
   data: {
-    motto: 'Hello World',
-    userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    statusBarHeight: app.globalData.statusBarHeight
+    activeIndex: 1,
   },
   //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
+  changeSorter: function(e) {
+    const { dataset: { activeIndex }} = e.target;
+    this.setData({
+      activeIndex: Number(activeIndex),
     })
   },
   onLoad: function () {
