@@ -1,0 +1,10 @@
+<map
+ id="myMap"
+ latitude="{{latitude}}"
+ longitude="{{longitude}}"
+ markers="{{markers}}"
+ covers="{{covers}}"
+ subKey="Q7MBZ-6LXWJ-FBQFV-KBKBX-WW4N2-OJBEM"
+ show-location
+ >
+</map>

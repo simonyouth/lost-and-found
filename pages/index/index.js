@@ -13,6 +13,12 @@ Page({
       activeIndex: Number(activeIndex),
     })
   },
+  // 跳转到map
+  navigateToMap: () => {
+    wx.navigateTo({
+      url: '../map/index',
+    })
+  },
   onLoad: function () {
     if (app.globalData.userInfo) {
       this.setData({
