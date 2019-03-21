@@ -1,0 +1,15 @@
+<view class='main'>
+  <view class='title'>{{ list.title }}</view>
+  <view class='time'>{{ list.createTime }}</view>
+  <view class='content'>“{{ list.content}}”</view>
+  <view class='related'>
+    <view class='user'>
+      <image mode="aspectFit" src='../../static/images/home.png' class='icon'></image>
+      <view class='name'>{{ list.user }}</view>
+    </view>
+    <view class='location'>
+      <image mode="aspectFit" src='../../static/images/location.png' class='l-icon'></image>
+      <view class='addr'>{{ list.location }}</view>
+    </view>
+  </view>
+</view>

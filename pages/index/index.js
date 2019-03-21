@@ -1,10 +1,10 @@
-//index.js
-//获取应用实例
+import { testList } from '../../utils/store.js';
 const app = getApp()
 
 Page({
   data: {
     activeIndex: 1,
+    list: testList,
   },
   //事件处理函数
   changeSorter: function(e) {

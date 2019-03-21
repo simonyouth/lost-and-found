@@ -1,0 +1,50 @@
+.main {
+  padding: 40rpx 30rpx;
+  margin-top: 20rpx;
+  box-shadow: 30rpx 30rpx 20rpx rgb(204, 214, 166);
+  border-radius: 10rpx;
+  background-color: #fff;
+}
+.title {
+ display: inline-block;
+}
+.time {
+  float: right;
+  font-size: 18rpx;
+  color: rgb(117, 119, 109);
+}
+.content {
+  margin-top: 30rpx;
+  font-size: 28rpx;
+  color: rgb(21, 112, 82);
+}
+.related {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 30rpx;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+}
+.name {
+  margin-left: 20rpx;
+}
+.icon {
+  width: 50rpx;
+  height: 50rpx;
+}
+.location {
+  display: flex;
+  align-items: center;
+}
+.addr {
+  font-size: 24rpx;
+  color: rgb(240, 112, 155)
+}
+.l-icon {
+  width: 40rpx;
+  height: 40rpx;
+}
