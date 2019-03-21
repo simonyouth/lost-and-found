@@ -7,4 +7,7 @@
  subKey="Q7MBZ-6LXWJ-FBQFV-KBKBX-WW4N2-OJBEM"
  show-location
  >
+ <cover-view>
+   <search />
+ </cover-view>
 </map>
