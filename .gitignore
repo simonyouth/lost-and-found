@@ -4,7 +4,7 @@
 # production
 /dist
 /vscode
-
+/typings
 
 # misc
 .DS_Store
