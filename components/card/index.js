@@ -25,6 +25,17 @@ Component({
    * 组件的方法列表
    */
   methods: {
-
+    onTap() {
+      this.triggerEvent('ondetail', {})
+    },
+    previewImage(e) {
+      // 本地测试图片，无法预览
+      const { current, urls } = e.target.dataset;
+      wx.previewImage({
+        urls,
+        current,
+        fail: (e) => { console.log(e)}
+      })
+    }
   }
 })

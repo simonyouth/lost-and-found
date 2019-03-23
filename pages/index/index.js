@@ -13,6 +13,9 @@ Page({
       activeIndex: Number(activeIndex),
     })
   },
+  onDetail: (id) => {
+    console.log('点击！！');
+  },
   // 跳转到map
   navigateToMap: () => {
     wx.navigateTo({

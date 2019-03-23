@@ -7,7 +7,7 @@
 .title {
   padding: 10rpx;
   display: inline-block;
-  font-size: 14pt;
+  font-size: 13pt;
 }
 .lost {
   margin-right: 20rpx;
@@ -18,21 +18,32 @@
   color: rgba(43, 200, 221, 0.849);
 }
 
-.list {
-  height: 100%;
+.content {
+  position: relative;
 }
-
+.list {
+  padding: 0 20rpx;
+  box-sizing: border-box;
+}
+.show-more {
+  position: absolute;
+  bottom: 10rpx;
+  width: 100%;
+  font-size: 8pt;
+  color: #ccc;
+  text-align: center;
+}
 .find {
-  width: 140rpx;
-  height: 140rpx;
+  width: 110rpx;
+  height: 110rpx;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
+  position: sticky;
   bottom: 10%;
-  right: 20rpx;
+  left: 90%;
   background-color: rgba(43, 200, 221, 0.849);
   color: #fff;
-  font-size: 12pt;
+  font-size: 10pt;
 }

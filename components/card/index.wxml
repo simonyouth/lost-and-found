@@ -1,7 +1,18 @@
-<view class='main'>
+<view class='main' bindtap='onTap'>
   <view class='title'>{{ list.title }}</view>
   <view class='time'>{{ list.createTime }}</view>
   <view class='content'>“{{ list.content}}”</view>
+  <view wx:if="list.picture"  class='picture-cage'>
+   <block wx:for="{{list.picture}}" wx:key="item">
+      <image
+        catchtap='previewImage'
+        class='picture'
+        mode="widthFix" 
+        data-current="{{ item }}"
+        data-urls="{{ list.picture }}"
+        src="{{ item }}"></image>
+    </block>
+  </view>
   <view class='related'>
     <view class='user'>
       <image mode="aspectFit" src='../../static/images/home.png' class='icon'></image>

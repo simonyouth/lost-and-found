@@ -1,11 +1,12 @@
 .main {
   padding: 40rpx 30rpx;
   margin-top: 20rpx;
-  box-shadow: 30rpx 30rpx 20rpx rgb(204, 214, 166);
+  box-shadow: 2px 2px 1px rgb(181, 187, 158);
   border-radius: 10rpx;
   background-color: #fff;
 }
 .title {
+  font-size: 11pt;
  display: inline-block;
 }
 .time {
@@ -17,6 +18,16 @@
   margin-top: 30rpx;
   font-size: 28rpx;
   color: rgb(21, 112, 82);
+}
+.picture-cage {
+  margin-top: 30rpx;
+  margin-bottom: 30rpx;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+} 
+.picture {
+  width: 30%;
 }
 .related {
   display: flex;
@@ -31,6 +42,7 @@
 }
 .name {
   margin-left: 20rpx;
+  font-size: 10pt;
 }
 .icon {
   width: 50rpx;
@@ -41,7 +53,7 @@
   align-items: center;
 }
 .addr {
-  font-size: 24rpx;
+  font-size: 9pt;
   color: rgb(240, 112, 155)
 }
 .l-icon {
