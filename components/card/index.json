@@ -1,4 +1,7 @@
 {
   "component": true,
-  "usingComponents": {}
+  "usingComponents": {
+        "location-with-icon": "/components/location-with-icon/location-with-icon"
+        
+  }
 }

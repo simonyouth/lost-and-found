@@ -18,9 +18,6 @@
       <image mode="aspectFit" src='../../static/images/home.png' class='icon'></image>
       <view class='name'>{{ list.user }}</view>
     </view>
-    <view class='location'>
-      <image mode="aspectFit" src='../../static/images/location.png' class='l-icon'></image>
-      <view class='addr'>{{ list.location }}</view>
-    </view>
+    <location-with-icon location="{{list.location}}"></location-with-icon>
   </view>
 </view>
