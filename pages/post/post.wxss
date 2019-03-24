@@ -1,0 +1,49 @@
+.post {
+  margin-top: 20rpx;
+  padding: 30rpx 20rpx;
+  border-radius: 20rpx;
+  background-color: #fff;
+}
+
+.header {
+  margin-bottom: 30rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+}
+
+.body {
+  padding: 20rpx;
+}
+.picture {
+  margin-bottom: 30rpx;
+  margin-top: 30rpx;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.img {
+  width: 30%;
+}
+.content {
+  margin-bottom: 30rpx;
+}
+.mark {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.action-bar {
+  padding-top: 10rpx;
+  padding-bottom: 10rpx;
+  position: sticky;
+  top: 100%;
+  display: flex; 
+  border-top: 1rpx solid rgb(222, 223, 226);
+  background-color: #fff;
+}

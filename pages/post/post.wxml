@@ -1,0 +1,32 @@
+<view class='post'>
+  <view class='header'>
+    <view class='user'>
+      <image class='usericon' src='../../static/images/home.png'></image>
+      <text>username</text>
+    </view>
+    <view><button>转发</button></view>
+  </view>
+  <view class='line' />
+  <view class='body'>
+    <view class='picture'>
+      <image
+        class='img'
+        mode='widthFix'
+        src='../../static/images/home.png'>
+      </image>
+    </view>
+    <view class='content'>wx.navigateTo和 wx.redirectTo不允许跳转到 tab 所包含的页面，只能用 wx.switchTab跳转。需要注意的是， wx.switchTab中的 url不能传参数</view>
+  </view>
+  <view class='mark'>
+    <view>
+     <view class='tag offset-right'>生活用品</view>
+     <view class='tag'>日用品</view>
+    </view>
+    <view class='location'>
+    </view>
+  </view>
+</view>
+<view class='action-bar'>
+  <button>留言</button>
+  <button>私信</button>
+</view>
