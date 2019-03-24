@@ -1,17 +1,19 @@
-import { testList } from '../../utils/store.js';
+import { testList, testList2 } from '../../utils/store.js';
 const app = getApp()
 
 Page({
   data: {
     activeIndex: 1,
     list: testList,
+    foundList: testList2,
   },
   //事件处理函数
   changeSorter: function(e) {
     const { dataset: { activeIndex }} = e.target;
     this.setData({
       activeIndex: Number(activeIndex),
-    })
+    });
+    // TODO 请求数据
   },
   onDetail: (id) => {
     console.log('点击！！');

@@ -4,7 +4,7 @@
 </view>
 
 <view class='list'>
-  <block wx:for="{{ list }}" wx:key="{{index}}">
+  <block wx:for="{{ activeIndex === 1 ? list : foundList }}" wx:key="{{index}}">
     <card list="{{ item }}" bindondetail="onDetail"></card>
   </block>
 </view>
