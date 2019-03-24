@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    id: String,
   },
 
   /**
@@ -13,6 +13,7 @@ Page({
    */
   onLoad: function (options) {
     // TODO queryString取贴子ID，请求数据
+    const { id } = options;
   },
 
   /**

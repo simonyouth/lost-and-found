@@ -15,8 +15,13 @@ Page({
     });
     // TODO 请求数据
   },
-  onDetail: (id) => {
-    console.log('点击！！');
+  onDetail: (e) => {
+    // 从子组件传来的数据，存在detail中
+    const { id } = e.detail;
+    console.log('点击！！', id);
+    wx.navigateTo({
+      url: `/pages/post/post?id=${id}`,
+    })
   },
   // 跳转到map
   navigateToMap: () => {
