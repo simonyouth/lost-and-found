@@ -14,8 +14,18 @@
 }
 
 .actived {
-  border-bottom: 2rpx solid rgba(43, 200, 221, 0.849);
-  color: rgba(43, 200, 221, 0.849);
+  position: relative;
+  /* border-bottom: 2rpx solid rgb(251,114,153); */
+  color: rgb(251,114,153);
+}
+.actived::after {
+  content: ' ';
+  position: absolute;
+  background-color: rgb(251,114,153);
+  height: 2rpx;
+  width: 60%;
+  bottom: 0;
+  left: 20rpx;
 }
 
 .content {
