@@ -1,0 +1,9 @@
+.button {
+  padding: 6rpx 20rpx;
+  border-radius: 10rpx;
+  /* border: 2rpx solid rgb(251,114,153); */
+  font-size: 25rpx;
+  text-align: center;
+  color: #fff;
+  background-color: rgb(251,114,153);
+}

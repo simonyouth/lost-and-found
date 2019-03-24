@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "custom-botton": "/components/custom-button/custom-button"
+  }
+}

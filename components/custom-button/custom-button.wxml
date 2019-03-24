@@ -1,0 +1,3 @@
+<view class='button custom-button' bindtap='onTap'>
+ {{ text }}
+</view>

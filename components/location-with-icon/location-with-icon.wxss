@@ -2,6 +2,7 @@
   position: relative;
   font-size: 9pt;
   text-align: center;
+  color: rgb(251,114,153);
 }
 
 .location::before {

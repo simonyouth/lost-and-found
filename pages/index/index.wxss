@@ -15,7 +15,6 @@
 
 .actived {
   position: relative;
-  /* border-bottom: 2rpx solid rgb(251,114,153); */
   color: rgb(251,114,153);
 }
 .actived::after {
@@ -36,9 +35,7 @@
   box-sizing: border-box;
 }
 .show-more {
-  position: absolute;
-  bottom: 10rpx;
-  width: 100%;
+  margin-top: 40rpx;
   font-size: 8pt;
   color: #ccc;
   text-align: center;

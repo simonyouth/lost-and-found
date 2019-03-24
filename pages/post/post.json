@@ -1,3 +1,6 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "location-with-icon": "/components/location-with-icon/location-with-icon",
+    "custom-button": "/components/custom-button/custom-button"
+  }
 }

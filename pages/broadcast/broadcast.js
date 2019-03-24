@@ -1,23 +1,23 @@
-// pages/post/post.js
+const app = getApp();
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    id: String,
+    userInfo: app.globalData.userInfo,
   },
-  onBroadcast: function(detail) {
-    wx.navigateTo({
-      url: `/pages/broadcast/broadcast`,
-    })
-  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // TODO queryString取贴子ID，请求数据
-    const { id } = options;
+    if(app.globalData.userInfo) {
+      this.setData({
+        userInfo: app.globalData.userInfo,
+      })
+    }
   },
 
   /**

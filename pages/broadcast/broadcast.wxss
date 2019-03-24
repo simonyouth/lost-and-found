@@ -1,0 +1,24 @@
+.user {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.usericon {
+  width: 70rpx;
+  height: 70rpx;
+}
+
+.name {
+  margin-top: 26rpx;
+  margin-bottom: 20rpx;
+  font-size: 12pt;
+}
+
+.edit {
+  padding: 20rpx;
+}
+
+.custom-button {
+  background-color: rgb(251,114,153);
+}
