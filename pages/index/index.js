@@ -1,4 +1,5 @@
 import { testList, testList2 } from '../../utils/store.js';
+import { qqmap } from '../../utils/util.js';
 const app = getApp()
 
 Page({
@@ -30,12 +31,30 @@ Page({
     })
   },
   onLoad: function () {
+    this.setUserInfo();
+    // 获取城市列表
+    qqmap.getCityList({
+      success: (res) => {
+        console.log('省份数据：', res.result[0]); //打印省份数据
+        console.log('城市数据：', res.result[1]); //打印城市数据
+        console.log('区县数据：', res.result[2]); //打印区县数据
+      },
+      fail: (e) => {
+        console.log(e);
+      },
+      complete: function (res) {
+        console.log(res);
+      }
+    });
+  },
+
+  setUserInfo: function () {
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
         hasUserInfo: true
       })
-    } else if (this.data.canIUse){
+    } else if (this.data.canIUse) {
       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
       // 所以此处加入 callback 以防止这种情况
       app.userInfoReadyCallback = res => {

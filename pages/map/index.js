@@ -1,5 +1,4 @@
-import QQMapWX from '../../utils/qqmap-wx-jssdk.min.js';
-let qqmapsdk;
+import { qqmap } from '../../utils/util.js';
 Page({
   data: {
     longitude: 113.3241,
@@ -10,9 +9,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    qqmapsdk = new QQMapWX({
-      key: 'Q7MBZ-6LXWJ-FBQFV-KBKBX-WW4N2-OJBEM'
-    });
+   
   },
 
   onReady: function (e) {
