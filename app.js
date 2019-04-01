@@ -3,11 +3,6 @@ import { httpRequest } from './utils/request.js';
 
 App({
   onLaunch: function () {
-    // 展示本地存储能力
-    var logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
-
     // 登录
     wx.login({
       success: res => {
@@ -19,8 +14,9 @@ App({
               code: res.code
             },
           }).then(alldata => {
-            const { data } = alldata;
-            console.log(alldata)
+            const sessionID = alldata.header['set-cookie'];
+            // 本地存储cookies
+            wx.setStorageSync('sessionId', sessionID);
             // 发送用户信息
             wx.getSetting({
               success: res => {
@@ -37,12 +33,12 @@ App({
                         data: params,
                         header: {
                           "content-type": "application/x-www-form-urlencoded",
-                          "Cookie": alldata.header['set-cookie'],
+                          // "Cookie": sessionID,
                         },
                         method: 'POST',
                       }).then(docinfo => {
                         
-                      })
+                      });
                       // 可以将 res 发送给后台解码出 unionId
                       this.globalData.userInfo = res.userInfo
                       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
@@ -66,4 +62,4 @@ App({
     userInfo: null,
     statusBarHeight: wx.getSystemInfoSync()['statusBarHeight']
   }
-})
+});
