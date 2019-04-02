@@ -1,13 +1,27 @@
+<view class="top-bar search-cage">
+ <view class="search">
+  <search />
+ </view>
+</view>
 <map
- id="myMap"
- latitude="{{latitude}}"
- longitude="{{longitude}}"
- markers="{{markers}}"
- covers="{{covers}}"
- subKey="Q7MBZ-6LXWJ-FBQFV-KBKBX-WW4N2-OJBEM"
- show-location
+  id="myMap"
+  show-location
+  bindregionchange="handleRegion"
+  latitude="{{latitude}}"
+  longitude="{{longitude}}"
+  markers="{{markers}}"
+  subKey="Q7MBZ-6LXWJ-FBQFV-KBKBX-WW4N2-OJBEM"
+  bindpoitap="poitap"
  >
- <cover-view>
-   <search />
- </cover-view>
 </map>
+<view class="list">
+ <scroll-view
+    scroll-y
+    class="scroll-list"
+ >
+  <block wx:for="{{suggestions}}" wx:key="{{index}}">
+   <view>{{item.name}}</view>
+  </block>
+ </scroll-view>
+ <button type="primary" class="commit">完成</button>
+</view>

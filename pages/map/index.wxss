@@ -2,3 +2,23 @@
   width: 100%;
   height: 300px;
 }
+.search-cage {
+  padding-bottom: 10rpx;
+  border-top: 2rpx solid #e2e2e2;
+}
+.search {
+  width: 80%;
+  margin: auto;
+}
+
+.list {
+  margin-top: 10rpx;
+  height: calc(100% - 420px);
+}
+.scroll-list {
+  height: 100%;
+}
+
+.commit {
+  margin: 20rpx;
+}

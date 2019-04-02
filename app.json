@@ -15,7 +15,7 @@
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fb7299",
     "navigationBarTitleText": "丢失的东西在哪里",
-    "navigationBarTextStyle": "black"
+    "navigationBarTextStyle": "white"
   },
   "tabBar": {
     "list": [
