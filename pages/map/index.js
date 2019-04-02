@@ -1,6 +1,11 @@
 import { qqmap } from '../../utils/util.js';
 import cloneDeep from 'lodash.clonedeep';
-const test = new Array(20);
+let test = new Array(20);
+test.fill(1)
+test = test.map((v, i) => ({
+  name: `测试数据${i}`,
+  id: i,
+}));
 Page({
   data: {
     longitude: Number,
@@ -20,7 +25,8 @@ Page({
       width: 40,
       height: 40,
     }],
-    suggestions: test.fill({name: '河南1111'}),
+    suggestions: test,
+    selected: String,
   },
 
   /**
@@ -41,44 +47,69 @@ Page({
     this.mapCtx = wx.createMapContext('myMap');
   },
   getCenterLocation: function () {
-    const markers = cloneDeep(this.data.markers);
     this.mapCtx.getCenterLocation({
       success: (res) => {
-        markers[0].latitude = res.latitude;
-        markers[0].longitude = res.longitude;
-        this.setData({
-          markers,
-        })
+        this.setMarkers(res, 1)
       }
     })
   },
-  searchByKeywords: (word) => {
+  // 更新标记
+  setMarkers(location, index) {
+    const markers = cloneDeep(this.data.markers);
+    markers[index].latitude = location.latitude;
+    markers[index].longitude = location.longitude;
+    this.setData({
+      markers,
+    })
+  },
+
+  searchByKeywords(e) {
+    const { value } = e.detail;
     qqmap.search({
-      keyword: word,
+      keyword: value,
       success: (res) => {
-        console.log(res)
+        this.setData({
+          suggestions: res.data,
+          selected: res.data[0] && res.data[0].id,
+        })
       },
     })
   },
+
   touchMap: function(res){
     console.log(res)
   },
+
+  // 视野移动，获取中心位置
   handleRegion: function(e) {
     if (e.type === 'end' && (e.causedBy === 'drag' || e.causedBy === 'scale')) {
       this.getCenterLocation();
     }
   },
+
+  // poi
   poitap: function(res) {
-    console.log(res);
-    const { latitude, longitude } = res.detail;
-    const markers = cloneDeep(this.data.markers);
-    markers[1].longitude = longitude;
-    markers[1].latitude = latitude;
+    this.setMarkers(res.detail, 1);
     this.setData({
-      markers,
       suggestions: [res],
     })
   },
+
+  // 选择location
+  selectLocation(e) {
+    const { item } = e.detail;
+
+    // 更新poi点，选择的位置和点击的poi位置公用一个marker
+    this.setMarkers({
+      longitude: item.location.lng,
+      latitude: item.location.lat,
+    }, 1);
+
+    this.setData({
+      selected: item.id,
+    })
+  },
+
   // 当前位置
   getCurrentLocation: () => {
     wx.getLocation({
@@ -91,10 +122,12 @@ Page({
       }
     });
   },
+
   // 移到中心点
   moveToLocation: () => {
     this.mapCtx.moveToLocation();
   },
+
   /**
    * 监听页面显示
    */

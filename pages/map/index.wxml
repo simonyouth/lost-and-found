@@ -1,6 +1,6 @@
 <view class="top-bar search-cage">
  <view class="search">
-  <search />
+  <search bindinputchange="searchByKeywords"/>
  </view>
 </view>
 <map
@@ -19,9 +19,7 @@
     scroll-y
     class="scroll-list"
  >
-  <block wx:for="{{suggestions}}" wx:key="{{index}}">
-   <view>{{item.name}}</view>
-  </block>
+  <radio-group dataSource="{{suggestions}}" selected="{{selected}}" bindselect="selectLocation"/>
  </scroll-view>
  <button type="primary" class="commit">完成</button>
 </view>

@@ -1,5 +1,6 @@
 {
   "usingComponents": {
-    "search": "../../components/search/index"
+    "search": "../../components/search/index",
+    "radio-group": "../../components/radio-group/radio-group"
   }
 }

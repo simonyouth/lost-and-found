@@ -1,0 +1,11 @@
+<view>
+    <block wx:for="{{dataSource}}" wx:key="{{item.id}}">
+        <view class="item-cage" bindtap="onTap" data-item="{{item}}">
+            <view class="name">
+                <text class="title">{{item.title}}</text>
+                <text class="addr">{{item.address}}</text>
+            </view>
+            <image wx:if="{{item.id === selected}}" mode="aspectFit" src='./images/radio.png' class='icon'></image>
+        </view>
+    </block>
+</view>

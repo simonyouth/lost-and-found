@@ -22,6 +22,9 @@ Component({
    * 组件的方法列表
    */
   methods: {
-
+    oninput(e) {
+      const { value } = e.detail;
+      this.triggerEvent('inputchange', { value })
+    }
   }
-})
+});

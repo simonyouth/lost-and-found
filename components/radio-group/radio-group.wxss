@@ -1,0 +1,21 @@
+.item-cage {
+  padding: 10rpx 20rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.name {
+  display: flex;
+  flex-direction: column;
+}
+.title {
+  font-size: 13px;
+}
+.addr {
+  font-size: 11px;
+  color: dimgray;
+}
+.icon {
+  width: 20px;
+  height: 20px;
+}
