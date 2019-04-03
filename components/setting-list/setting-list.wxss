@@ -1,0 +1,13 @@
+.item {
+  padding: 0 20rpx 20rpx 20rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2rpx solid #f8f5f5;
+}
+.normal-font {
+  font-size: 10pt;
+}
+.offset-item {
+  padding-top: 30rpx;
+}

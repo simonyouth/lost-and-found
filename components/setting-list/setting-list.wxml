@@ -1,0 +1,6 @@
+<block wx:for="{{dataSource}}" wx:key="{{index}}">
+  <view class="item {{index > 0 ? 'offset-item' : '' }}">
+    <view class="normal-font">{{item.title}}</view>
+    <view class="normal-font"> > </view>
+  </view>
+</block>

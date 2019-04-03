@@ -1,3 +1,38 @@
-<view>
+<view class="container">
+  <view class="person">
+    <!-- user info -->
+    <view class="user">
+      <image src="{{userInfo.avatarUrl}}" class="circle-big-icon"/>
+      <view class="name-time">
+        <view class="normal-font">{{userInfo.nickName}}</view>
+        <view class="time">创建于 2019/4/3</view>
+      </view>
+    </view>
+    <!-- 编辑个人信息 -->
+    <view>
+      <button id='normal-button'>编辑</button>
+    </view>
 
+  </view>
+
+  <view class="line" />
+
+  <view class="hor-icon-action">
+    <view class="icon-action">
+      <icon type="success" size="23"/>
+      <text class="icon-offset">我找回的</text>
+    </view>
+    <view class="icon-action">
+      <icon type="success" size="23"/>
+      <text class="icon-offset">我发布的</text>
+    </view>
+    <view class="icon-action">
+      <icon type="success" size="23"/>
+      <text class="icon-offset">我关注的</text>
+    </view>
+  </view>
+</view>
+
+<view class="container">
+  <list dataSource="{{settingList}}" />
 </view>

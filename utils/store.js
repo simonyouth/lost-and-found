@@ -53,4 +53,12 @@ export const testList2 = [{
   userIcon: '',
   createTime: '1小时前',
   location: '浙江大学紫金港校区',
-}] 
+}];
+
+export const settingList = [{
+  title: '问题反馈'
+}, {
+  title: '手机认证',
+}, {
+  title: '用户投诉'
+}];
