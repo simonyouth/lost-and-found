@@ -7,6 +7,7 @@ Page({
     activeIndex: 1,
     list: testList,
     foundList: testList2,
+    customLocation: Object, // 选择的位置
   },
   //事件处理函数
   changeSorter: function(e) {
@@ -25,26 +26,34 @@ Page({
     })
   },
   // 跳转到map
-  navigateToMap: () => {
-    wx.navigateTo({
-      url: '../map/index',
-    })
+  navigateToMap() {
+    // 自定义的地图
+    // wx.navigateTo({
+    //   url: '../map/index',
+    // })
+
+    // 小程序自带地图
+    wx.chooseLocation({
+        success: res => {
+          console.log(res)
+          this.setData({
+            customLocation: res,
+          })
+        }
+    });
   },
   onLoad: function () {
     this.setUserInfo();
     // 获取城市列表
     qqmap.getCityList({
       success: (res) => {
-        console.log('省份数据：', res.result[0]); //打印省份数据
-        console.log('城市数据：', res.result[1]); //打印城市数据
-        console.log('区县数据：', res.result[2]); //打印区县数据
+        // console.log('省份数据：', res.result[0]); //打印省份数据
+        // console.log('城市数据：', res.result[1]); //打印城市数据
+        // console.log('区县数据：', res.result[2]); //打印区县数据
       },
       fail: (e) => {
         console.log(e);
       },
-      complete: function (res) {
-        console.log(res);
-      }
     });
   },
 
