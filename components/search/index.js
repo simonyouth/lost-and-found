@@ -3,7 +3,7 @@ Component({
   /**
    * 外部样式类
    */
-  externalClasses: ['out-search'],
+  externalClasses: ['search'],
   /**
    * 组件的属性列表
    */

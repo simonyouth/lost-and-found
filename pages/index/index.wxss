@@ -1,4 +1,9 @@
-/**index.wxss**/
+.filter-box {
+  display: flex;
+}
+.search {
+  width: 150rpx !important;
+}
 .userinfo {
   display: flex;
   flex-direction: column;

@@ -1,3 +1,5 @@
-
-  <input class="search" placeholder="搜索" bindinput="oninput"></input>
+<view class="search-cage search">
+  <icon class="search-icon" size="16" type='search'></icon>
+  <input class="search-input" placeholder="搜索" value="{{searchValue}}" maxlength="10"/>
+</view>
 

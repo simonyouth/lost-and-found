@@ -1,4 +1,9 @@
 <view class='top-bar'>
+  <view class="filter-box">
+    <view>
+      <search class="search"/>
+    </view>
+  </view>
   <view class="lost title {{activeIndex === 1 ? 'actived' : ''}}" bindtap='changeSorter' data-active-index="1">失物贴</view>
   <view class="found title {{activeIndex === 2 ? 'actived' : ''}}" bindtap='changeSorter' data-active-index="2">寻物贴</view>
 </view>
