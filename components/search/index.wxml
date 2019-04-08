@@ -1,5 +1,5 @@
-<view class="search-cage search">
+<view class="search-cage my-class">
   <icon class="search-icon" size="16" type='search'></icon>
-  <input class="search-input" placeholder="搜索" value="{{searchValue}}" maxlength="10"/>
+  <input class="search-input" placeholder="搜索" />
 </view>
 
