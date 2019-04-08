@@ -1,0 +1,33 @@
+.letter {
+  padding: 0 20rpx 20rpx 20rpx;
+}
+.person {
+  padding: 20rpx 10rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2rpx solid #e2e2e2;
+}
+.user {
+  display: flex;
+  align-items: center;
+}
+.name-content {
+  margin-left: 20rpx;
+  display: flex;
+  max-width: 450rpx;
+  flex-direction: column;
+}
+.content {
+  margin-top: 8rpx;
+  font-size: 9pt;
+  color: rgb(163, 166, 173);
+}
+.overflow-text {
+  word-break: keep-all;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.normal-font {
+  font-size: 10pt;
+}

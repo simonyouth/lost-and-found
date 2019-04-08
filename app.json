@@ -4,7 +4,9 @@
     "pages/index/index",
     "pages/personal/personal",
     "pages/map/index",
-    "pages/broadcast/broadcast"
+    "pages/broadcast/broadcast",
+    "pages/letter/letter",
+    "pages/letterDetail/index"
   ],
   "permission": {
     "scope.userLocation": {
@@ -22,6 +24,12 @@
       {
         "pagePath": "pages/index/index",
         "text": "首页",
+        "iconPath": "static/images/home.png",
+        "selectedIconPath": "static/images/home.png"
+      },
+      {
+        "pagePath": "pages/letter/letter",
+        "text": "消息",
         "iconPath": "static/images/home.png",
         "selectedIconPath": "static/images/home.png"
       },

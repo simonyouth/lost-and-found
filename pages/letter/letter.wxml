@@ -1,0 +1,22 @@
+
+<view wx:if="{{userInfo}}" class="letter">
+  <block wx:for="{{letterList}}" wx:key="{{index}}">
+    <view class="person" bindtap="onTap">
+      <!-- user info -->
+      <view class="user">
+        <image src="{{userInfo.avatarUrl}}" class="circle-big-icon"/>
+        <view class="name-content">
+          <view class="normal-font overflow-text">{{userInfo.nickName}}</view>
+          <view class="content overflow-text">请问您在具体在哪看到的aaaaaaaaaaaaa111a</view>
+        </view>
+      </view>
+      <!-- 编辑个人信息 -->
+      <view class="normal-font">
+        2019/3/15
+      </view>
+    </view>
+  </block>
+</view>
+<view wx:else>
+  <button open-type="getUserInfo" id="normal-button" bindgetuserinfo="onGotUserInfo">登录</button>
+</view>

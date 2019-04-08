@@ -1,0 +1,12 @@
+.bubble {
+  padding: 10rpx;
+  border: 2rpx solid #e2e2e2;
+}
+
+.bubble::before {
+  content: '';
+  display: block;
+  width: 40rpx;
+  height: 40rpx;
+  border: 2rpx solid #e2e2e2;
+}

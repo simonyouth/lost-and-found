@@ -3,6 +3,10 @@ import { httpRequest } from './utils/request.js';
 
 App({
   onLaunch: function () {
+    wx.setTabBarBadge({
+      index: 1,
+      text: '123',
+    });
     // 登录
     wx.login({
       success: res => {
