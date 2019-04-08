@@ -42,6 +42,12 @@ Page({
         }
     });
   },
+
+  // 搜索confirm
+  handleSearch(e) {
+    const { value } = e.detail;
+    console.log(value)
+  },
   onLoad: function () {
     this.setUserInfo();
     // 获取城市列表

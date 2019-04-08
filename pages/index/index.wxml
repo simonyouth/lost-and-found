@@ -1,7 +1,7 @@
 <view class='top-bar'>
   <view class="filter-box">
     <view>
-      <search my-class="search"/>
+      <search my-class="search" bindconfirm="handleSearch"/>
     </view>
   </view>
   <view class="lost title {{activeIndex === 1 ? 'actived' : ''}}" bindtap='changeSorter' data-active-index="1">失物贴</view>

@@ -1,5 +1,5 @@
 <view class="search-cage my-class">
-  <icon class="search-icon" size="16" type='search'></icon>
-  <input class="search-input" placeholder="搜索" />
+  <icon class="search-icon" size="16" type='search' bindtap="searchtap"></icon>
+  <input class="search-input" placeholder="搜索" config-type="search" bindconfirm="inputconfirm" bindinput="onchange"/>
 </view>
 
