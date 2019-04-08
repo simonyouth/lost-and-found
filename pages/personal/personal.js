@@ -1,4 +1,5 @@
 import { settingList } from '../../utils/store';
+import { decodeUserInfo } from '../../utils/request';
 const app = getApp();
 Page({
 
@@ -23,7 +24,18 @@ Page({
       })
     }
   },
-
+  onGotUserInfo(e) {
+    console.log(e);
+    const { encryptedData, iv, userInfo } = e.detail;
+    decodeUserInfo({
+      encryptedData,
+      iv,
+    });
+    app.globalData.userInfo = userInfo;
+    this.setData({
+      userInfo,
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

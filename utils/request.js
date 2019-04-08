@@ -1,4 +1,6 @@
 // 封装wx.request成Promise
+import base from "./config";
+
 export const httpRequest = function (option) {
   try {
     // 给每个请求种 cookie
@@ -17,4 +19,20 @@ export const httpRequest = function (option) {
   } catch (e) {
     console.error(e)
   }
+};
+
+// button 点击登录后 发送请求到服务端，获取userinfo
+export const decodeUserInfo = function (params, cb) {
+  httpRequest({
+    url: `${base}/users/decodeUserInfo`,
+    data: params,
+    header: {
+      "content-type": "application/x-www-form-urlencoded",
+    },
+    method: 'POST',
+  }).then(docinfo => {
+    if (cb) {
+      cb(docinfo)
+    }
+  });
 };
