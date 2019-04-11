@@ -1,12 +1,72 @@
-.bubble {
+.chat {
   padding: 10rpx;
-  border: 2rpx solid #e2e2e2;
 }
 
-.bubble::before {
-  content: '';
-  display: block;
-  width: 40rpx;
-  height: 40rpx;
+.bubble {
+  padding: 8rpx;
+  margin-left: 30rpx;
+  margin-top: 10rpx;
+  margin-bottom: 10rpx;
+  word-break: break-all;
+  display: inline-block;
+  max-width: 350rpx;
+  position: relative;
   border: 2rpx solid #e2e2e2;
+  border-radius: 6rpx;
+  font-size: 11pt;
+}
+
+.ta::before {
+  content: '';
+  position: absolute;
+  left: -30rpx;
+  bottom: 0;
+  width:0;
+  height:0;
+  border-width: 15rpx;
+  border-style: solid;
+  border-color: transparent #e2e2e2 #e2e2e2 transparent;
+}
+
+.me {
+  float: right;
+  right: 30rpx;
+}
+.me::after {
+  content: '';
+  position: absolute;
+  right: -30rpx;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  border-width: 15rpx;
+  border-style: solid;
+  border-color: transparent transparent #e2e2e2 #e2e2e2;
+}
+
+.send {
+  position: absolute;
+  bottom: 0;
+  padding: 15rpx 20rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  background-color: rgb(251,114,153);
+}
+.input {
+  padding: 8rpx;
+  flex: 1;
+  border: 2rpx solid #e2e2e2;
+}
+.text {
+  font-size: 11pt;
+  color: #ffffff;
+}
+.img {
+  width: 334rpx;
+}
+.offset {
+  margin-left: 10rpx;
+  margin-right: 10rpx;
 }
