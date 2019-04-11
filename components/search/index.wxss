@@ -1,6 +1,6 @@
 .search-cage {
     display: flex;
-    border: 1px solid #d0d0d0;
+    border: 2rpx solid #d0d0d0;
     border-radius: 10rpx;
     font-size: 12pt;
 }
@@ -8,7 +8,7 @@
     font-size: 10pt;
 }
 .search-icon {
-    margin: 10rpx;
+    margin: auto 10rpx;
     text-align: center;
 }
 

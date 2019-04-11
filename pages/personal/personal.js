@@ -11,6 +11,17 @@ Page({
     settingList: settingList,
   },
 
+  handleItem(e) {
+    const { key } = e.detail;
+    if (key === 'setting') {
+      wx.openSetting({
+        success: (res) => {
+          console.log(res)
+        }
+      })
+    }
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */

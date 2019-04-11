@@ -13,11 +13,14 @@ Component({
   data: {
 
   },
-
   /**
    * 组件的方法列表
    */
   methods: {
-
+    onTap(e) {
+      console.log(e)
+      const { key } = e.currentTarget.dataset;
+      this.triggerEvent('handleitem', { key });
+    },
   }
 })

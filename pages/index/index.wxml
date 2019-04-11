@@ -1,5 +1,8 @@
 <view class='top-bar'>
   <view class="filter-box">
+    <view class="city">
+     <location-with-icon location="{{city}}"/>
+    </view>
     <view>
       <search my-class="search" bindconfirm="handleSearch"/>
     </view>

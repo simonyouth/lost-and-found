@@ -1,4 +1,4 @@
-import { testList, testList2 } from '../../utils/store.js';
+import { testList, testList2, defaultCityLocation } from '../../utils/store.js';
 import { qqmap } from '../../utils/util.js';
 const app = getApp()
 
@@ -8,6 +8,7 @@ Page({
     list: testList,
     foundList: testList2,
     customLocation: Object, // 选择的位置
+    city: String,
   },
   //事件处理函数
   changeSorter: function(e) {
@@ -48,6 +49,19 @@ Page({
     const { value } = e.detail;
     console.log(value)
   },
+  // 地理位置逆转换
+  reverseGeocoder(location) {
+    return new Promise(resolve => {
+      qqmap.reverseGeocoder({
+        location,
+        success: (addr) => {
+          const { city } = addr.result.address_component;
+          resolve(addr.result);
+        },
+      })
+    });
+  },
+
   onLoad: function () {
     this.setUserInfo();
     // 获取城市列表
@@ -63,6 +77,33 @@ Page({
     });
   },
 
+  onShow() {
+    let location = defaultCityLocation;
+    wx.getLocation({
+      type: 'gcj02',
+      success: res => {
+        location = {
+          latitude: res.latitude,
+          longitude: res.longitude
+        }
+      },
+      fail: () => {
+        wx.showToast({
+          title: '定位失败，请到‘个人中心-设置’里允许获取位置信息，默认北京市',
+          icon: 'none'
+        })
+      },
+      complete: (res) => {
+        this.reverseGeocoder(location)
+          .then(addr => {
+            const { city } = addr.address_component;
+            this.setData({
+              city,
+            })
+          })
+      }
+    });
+  },
   setUserInfo: function () {
     if (app.globalData.userInfo) {
       this.setData({

@@ -1,8 +1,15 @@
 .filter-box {
   display: flex;
+  align-items: center;
+}
+.city {
+  margin-left: 30rpx;
+  font-size: 24rpx;
 }
 .search {
   width: 150rpx !important;
+  margin-left: 30rpx;
+  margin-right: 20rpx;
 }
 .userinfo {
   display: flex;

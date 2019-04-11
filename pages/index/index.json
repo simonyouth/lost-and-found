@@ -2,6 +2,7 @@
   "usingComponents": {
     "navbar": "../../components/navbar/index",
     "search": "../../components/search/index",
-    "card": "../../components/card/index"
+    "card": "../../components/card/index",
+    "location-with-icon": "../../components/location-with-icon/location-with-icon"
   }
 }

@@ -36,5 +36,5 @@
   <button open-type="getUserInfo" id="normal-button" bindgetuserinfo="onGotUserInfo">登录</button>
 </view>
 <view class="container">
-  <list dataSource="{{settingList}}" />
+  <list dataSource="{{settingList}}" bindhandleitem="handleItem"/>
 </view>

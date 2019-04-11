@@ -1,5 +1,5 @@
 <block wx:for="{{dataSource}}" wx:key="{{index}}">
-  <view class="item {{index > 0 ? 'offset-item' : '' }}">
+  <view class="item {{index > 0 ? 'offset-item' : '' }}" data-key="{{item.key}}" bindtap="onTap">
     <view class="normal-font">{{item.title}}</view>
     <view class="normal-font"> > </view>
   </view>

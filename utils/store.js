@@ -56,9 +56,21 @@ export const testList2 = [{
 }];
 
 export const settingList = [{
-  title: '问题反馈'
+  title: '设置',
+  key: 'setting'
+},{
+  title: '问题反馈',
+  key: 'back',
 }, {
   title: '手机认证',
+  key: 'confirm',
 }, {
-  title: '用户投诉'
+  title: '用户投诉',
+  key: 'complaint',
 }];
+
+// 北京的经纬度
+export const defaultCityLocation = {
+  longitude: 116.40,
+  latitude: 39.90,
+};
