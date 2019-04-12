@@ -1,15 +1,22 @@
 .filter-box {
+  margin-top: 10rpx;
   display: flex;
   align-items: center;
 }
 .city {
-  margin-left: 30rpx;
-  font-size: 24rpx;
+  /*margin-left: 30rpx;*/
+}
+.filter-font {
+  font-size: 28rpx;
 }
 .search {
-  width: 150rpx !important;
+  width: 250rpx !important;
   margin-left: 30rpx;
   margin-right: 20rpx;
+}
+.clickableText {
+  font-size: 26rpx;
+  color: rgb(251,114,153);
 }
 .userinfo {
   display: flex;

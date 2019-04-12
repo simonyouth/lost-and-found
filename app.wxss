@@ -74,5 +74,5 @@
   margin-right: 20rpx;
 }
 .bfc {
-  overflow: hidden;  /* 触发BFC */
+  overflow: auto;  /* 触发BFC */
 }

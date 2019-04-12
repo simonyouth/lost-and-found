@@ -1,0 +1,45 @@
+<view class="publish">
+    <form bindsubmit="formSubmit" bindreset="formReset">
+        <block wx:for="{{formList}}" wx:key="{{item.name}}">
+            <view class="item">
+                <label class="label">{{item.label}}</label>
+                <textarea
+                    name="{{item.name}}"
+                    class="input"
+                    placeholder="{{item.placeholder}}"
+                    auto-height/>
+            </view>
+        </block>
+        <view wx:if="{{!isLost}}" class="item">
+            <label class="label">图片</label>
+            <view wx:if="{{picList.length === 0}}" class="input label" bindtap="uploadPicture">
+                添加图片
+            </view>
+            <block wx:else>
+            <image
+                mode="widthFix"
+                wx:for="{{picList}}"
+                src="{{item}}"
+                wx:key="{{index}}"
+                class="upload-img"
+            ></image>
+            </block>
+        </view>
+        <view class="item">
+            <label class="label">类别</label>
+            <picker
+                name="sort"
+                class="input"
+                range-key="name"
+                bindchange="pickerChange"
+                value="{{index}}"
+                range="{{sortType}}">
+                <view class="picker {{index ? '' : 'label'}}">{{index ? sortType[index].name : '请选择'}}</view>
+            </picker>
+        </view>
+        <view class="action">
+          <button form-type="submit" class="custom-button">发布</button>
+          <button form-type="reset">重置</button>
+        </view>
+    </form>
+</view>

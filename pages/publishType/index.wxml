@@ -1,0 +1,4 @@
+<view class="publish-type">
+    <view class="circle lost" data-type="lost" bindtap="toPublish">失物帖</view>
+    <view class="circle found" data-type="found" bindtap="toPublish">寻物帖</view>
+</view>

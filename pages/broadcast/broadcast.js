@@ -7,6 +7,7 @@ Page({
    */
   data: {
     userInfo: app.globalData.userInfo,
+    content: String,
   },
 
   /**
@@ -18,8 +19,20 @@ Page({
         userInfo: app.globalData.userInfo,
       })
     }
+    wx.setNavigationBarTitle({
+      title: '添加留言'
+    })
   },
 
+  input(e) {
+    const { value } = e.detail;
+    this.setData({
+      content: value,
+    });
+  },
+  commit() {
+    // TODO 提交添加留言请求
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

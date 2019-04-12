@@ -1,1 +1,1 @@
-<view class="location offset">{{location}}</view>
+<view class="location my-class">{{location}}</view>

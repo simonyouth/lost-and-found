@@ -1,6 +1,6 @@
 // components/location-with-icon/location-with-icon.js
 Component({
-  externalClasses: ['offset'],
+  externalClasses: ['my-class'],
   /**
    * 组件的属性列表
    */

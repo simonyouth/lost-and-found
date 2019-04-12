@@ -21,4 +21,5 @@
 
 .custom-button {
   background-color: rgb(251,114,153);
+  color: #ffffff;
 }

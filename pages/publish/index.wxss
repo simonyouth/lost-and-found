@@ -1,0 +1,33 @@
+.publish {
+    background-color: #ffffff;
+}
+.item {
+    padding: 26rpx;
+    display: flex;
+    align-items: center;
+    border-bottom: 2rpx solid #e2e2e2;
+}
+.input {
+    margin-left: 25rpx;
+    overflow: hidden;
+    word-break: break-all;
+    flex: 1;
+}
+.label {
+    color: #808090;
+}
+.picker {
+    width: 100%;
+}
+.upload-img {
+    width: 200rpx;
+    margin-left: 25rpx;
+}
+.action {
+    padding: 40rpx 20rpx;
+}
+.custom-button {
+    margin-bottom: 30rpx;
+    background-color: rgb(251,114,153);
+    color: #ffffff;
+}

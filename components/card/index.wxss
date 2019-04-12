@@ -7,7 +7,7 @@
 }
 .title {
   font-size: 11pt;
- display: inline-block;
+  display: inline-block;
 }
 .time {
   float: right;
@@ -52,4 +52,7 @@
 .l-icon {
   width: 40rpx;
   height: 40rpx;
+}
+.font {
+  font-size: 24rpx;
 }

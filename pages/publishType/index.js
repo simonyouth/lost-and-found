@@ -1,28 +1,23 @@
-// pages/post/post.js
+// pages/publishType/index.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    id: String,
+
   },
-  onBroadcast: function(detail) {
+
+  toPublish(e) {
+    const { type } = e.target.dataset;
     wx.navigateTo({
-      url: `/pages/broadcast/broadcast`,
+      url: `../publish/index?type=${type}`
     })
   },
-  toLetter() {
-    wx.navigateTo({
-      url: `/pages/letterDetail/index`
-    })
-  },
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
-    // TODO queryString取贴子ID，请求数据
-    const { id } = options;
+    wx.setNavigationBarTitle({
+      title: '选择类型'
+    })
   },
 
   /**

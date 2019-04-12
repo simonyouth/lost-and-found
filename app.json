@@ -1,12 +1,14 @@
 {
   "pages": [
-    "pages/post/post",
     "pages/index/index",
+    "pages/post/post",
     "pages/personal/personal",
     "pages/map/index",
     "pages/broadcast/broadcast",
     "pages/letter/letter",
-    "pages/letterDetail/index"
+    "pages/letterDetail/index",
+    "pages/publish/index",
+    "pages/publishType/index"
   ],
   "permission": {
     "scope.userLocation": {

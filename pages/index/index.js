@@ -9,6 +9,7 @@ Page({
     foundList: testList2,
     customLocation: Object, // 选择的位置
     city: String,
+    timeDesc: true, // 默认时间降序
   },
   //事件处理函数
   changeSorter: function(e) {
@@ -24,6 +25,17 @@ Page({
     console.log('点击！！', id);
     wx.navigateTo({
       url: `/pages/post/post?id=${id}`,
+    })
+  },
+  // 时间排序
+  handleTime() {
+    this.setData({
+      timeDesc: !this.data.timeDesc
+    })
+  },
+  toPublish() {
+    wx.navigateTo({
+      url: '../publishType/index'
     })
   },
   // 跳转到map

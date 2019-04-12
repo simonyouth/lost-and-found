@@ -1,28 +1,52 @@
-// pages/post/post.js
+import { formList } from './constant';
+import { type } from '../../utils/store';
+const type2Word = { lost: '失物贴', found: '寻物贴' };
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    id: String,
+    formList: formList,
+    sortType: type,
+    isLost: false, // 是否是失物招领
+    picList: [], // 图片列表
   },
-  onBroadcast: function(detail) {
-    wx.navigateTo({
-      url: `/pages/broadcast/broadcast`,
+
+  pickerChange(e) {
+    this.setData({
+      index:e.detail.value
     })
   },
-  toLetter() {
-    wx.navigateTo({
-      url: `/pages/letterDetail/index`
-    })
+
+  uploadPicture() {
+    wx.chooseImage({
+      success: res => {
+        this.setData({
+          picList: res.tempFilePaths,
+        })
+
+      }
+    });
+  },
+  formSubmit(e) {
+    const { value } = e.detail;
+    // TODO POST请求，发布贴子
+  },
+  formReset() {
+    // 重置
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // TODO queryString取贴子ID，请求数据
-    const { id } = options;
+    const { type } = options;
+    wx.setNavigationBarTitle({
+      title: `发布${type2Word[type]}`
+    });
+    this.setData({
+      isLost: type === 'lost'
+    })
   },
 
   /**

@@ -4,7 +4,9 @@
   justify-content: space-between;
   align-items: center;
 }
-
+.scroll-view {
+  height: 280rpx;
+}
 .user {
   display: flex;
   align-items: center;
@@ -45,6 +47,7 @@
   justify-content: space-between;
   align-items: center;
 }
+
 .action-bar {
   padding-top: 20rpx;
   padding-bottom: 20rpx;
@@ -57,4 +60,22 @@
 }
 .custom-button {
   width: 140rpx;
+}
+.list-cage {
+  margin-top: 30rpx;
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+  vertical-align: middle;
+  font-size: 30rpx;
+}
+.list-item {
+  padding: 10rpx;
+  border-bottom: 2rpx solid #e2e2e2;
+}
+.offset-left {
+  margin-left: 16rpx;
+}
+.h {
+  font-size: 30rpx;
+  font-weight: bold;
 }

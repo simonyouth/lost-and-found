@@ -1,9 +1,11 @@
-<view class='container'>
-  <view class='user'>
-    <image class='usericon' src="{{ userInfo.avatarUrl }}"></image>
-    <text class='name'>{{ userInfo.nickName}}</text>
+<view class="bfc">
+  <view class='container'>
+    <view class='user'>
+      <image class='usericon' src="{{ userInfo.avatarUrl }}"></image>
+      <text class='name'>{{ userInfo.nickName}}</text>
+    </view>
+    <view class='line'></view>
+    <textarea class='edit' cursor-spacing='200' bindinput="input" bindconfirm="commit"></textarea>
+    <button class='custom-button' bindtap="commit">完成</button>
   </view>
-  <view class='line'></view>
-  <textarea class='edit'></textarea>
-  <button class='custom-button'>完成</button>
 </view>
