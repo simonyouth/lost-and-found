@@ -4,10 +4,22 @@
             <view class="item">
                 <label class="label">{{item.label}}</label>
                 <textarea
+                    wx:if="{{item.name === 'location'}}"
+                    disabled
+                    bindtap="toMap"
+                    value="{{address}}"
                     name="{{item.name}}"
                     class="input"
                     placeholder="{{item.placeholder}}"
-                    auto-height/>
+                    auto-height></textarea>
+                <block wx:else>
+                    <textarea
+                        name="{{item.name}}"
+                        class="input"
+                        placeholder="{{item.placeholder}}"
+                        auto-height></textarea>
+                </block>
+                <view class="must">*</view>
             </view>
         </block>
         <view wx:if="{{!isLost}}" class="item">
@@ -25,6 +37,14 @@
             ></image>
             </block>
         </view>
+        <view wx:if="{{!isLost}}" class="item">
+            <label class="label">酬金</label>
+            <input
+                name="money"
+                class="input"
+                placeholder="答谢金"
+            />
+        </view>
         <view class="item">
             <label class="label">类别</label>
             <picker
@@ -36,6 +56,7 @@
                 range="{{sortType}}">
                 <view class="picker {{index ? '' : 'label'}}">{{index ? sortType[index].name : '请选择'}}</view>
             </picker>
+            <view class="must">*</view>
         </view>
         <view class="action">
           <button form-type="submit" class="custom-button">发布</button>

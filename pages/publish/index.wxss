@@ -16,6 +16,10 @@
 .label {
     color: #808090;
 }
+.must {
+    font-size: 24rpx;
+    color: red;
+}
 .picker {
     width: 100%;
 }

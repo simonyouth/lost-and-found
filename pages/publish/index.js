@@ -13,6 +13,15 @@ Page({
     picList: [], // 图片列表
   },
 
+  toMap() {
+    wx.chooseLocation({
+        success:res=>{
+          this.setData({
+            address: res.address,
+          })
+        }
+    })
+  },
   pickerChange(e) {
     this.setData({
       index:e.detail.value
