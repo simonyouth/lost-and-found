@@ -6,23 +6,27 @@
                 <textarea
                     wx:if="{{item.name === 'location'}}"
                     disabled
+                    bindinput="input"
                     bindtap="toMap"
                     value="{{address}}"
                     name="{{item.name}}"
+                    data-name="{{item.name}}"
                     class="input"
                     placeholder="{{item.placeholder}}"
                     auto-height></textarea>
                 <block wx:else>
                     <textarea
+                        data-name="{{item.name}}"
+                        bindinput="input"
                         name="{{item.name}}"
                         class="input"
                         placeholder="{{item.placeholder}}"
                         auto-height></textarea>
                 </block>
-                <view class="must">*</view>
+                <view class="{{formData[item.name] ? 'ok' : 'must'}}">{{tip}}</view>
             </view>
         </block>
-        <view wx:if="{{!isLost}}" class="item">
+        <view wx:if="{{routerType === 'found'}}" class="item">
             <label class="label">图片</label>
             <view wx:if="{{picList.length === 0}}" class="input label" bindtap="uploadPicture">
                 添加图片
@@ -37,9 +41,11 @@
             ></image>
             </block>
         </view>
-        <view wx:if="{{!isLost}}" class="item">
+        <view wx:if="{{routerType === 'found'}}" class="item">
             <label class="label">酬金</label>
             <input
+                data-name="money"
+                bindinput="input"
                 name="money"
                 class="input"
                 placeholder="答谢金"
@@ -48,7 +54,8 @@
         <view class="item">
             <label class="label">类别</label>
             <picker
-                name="sort"
+                name="category"
+                data-name="category"
                 class="input"
                 range-key="name"
                 bindchange="pickerChange"
@@ -56,7 +63,7 @@
                 range="{{sortType}}">
                 <view class="picker {{index ? '' : 'label'}}">{{index ? sortType[index].name : '请选择'}}</view>
             </picker>
-            <view class="must">*</view>
+            <view class="{{formData['category'] ? 'ok' : 'must'}}">{{tip}}</view>
         </view>
         <view class="action">
           <button form-type="submit" class="custom-button">发布</button>

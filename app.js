@@ -13,14 +13,16 @@ App({
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
         if(res.code) {
          httpRequest({
-            url: `${base}/users/login`,
+            url: `users/login`,
             data: {
               code: res.code
             },
           }).then(alldata => {
             const sessionID = alldata.header['set-cookie'];
             // 本地存储cookies
-            wx.setStorageSync('sessionId', sessionID);
+           if (sessionID) {
+             wx.setStorageSync('sessionId', sessionID);
+           }
           })
         }
       }

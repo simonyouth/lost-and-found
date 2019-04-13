@@ -1,5 +1,7 @@
 import { formList } from './constant';
 import { type } from '../../utils/store';
+import { httpRequest } from '../../utils/request';
+
 const type2Word = { lost: '失物贴', found: '寻物贴' };
 Page({
 
@@ -9,28 +11,50 @@ Page({
   data: {
     formList: formList,
     sortType: type,
-    isLost: false, // 是否是失物招领
+    routerType: 'found', // lost, found
     picList: [], // 图片列表
+    formData: {},
+    tip: '*', // 必填提示
   },
 
-  toMap() {
+  toMap(e) {
+    const { name } = e.target.dataset;
     wx.chooseLocation({
-        success:res=>{
+        success: res => {
           this.setData({
             address: res.address,
-          })
+          });
+          this.updateFormData(name, res.address)
         }
     })
   },
   pickerChange(e) {
+    const { name } = e.target.dataset;
+    const { value } = e.detail;
     this.setData({
-      index:e.detail.value
-    })
+      index: value
+    });
+    this.updateFormData(name, value)
   },
 
+  updateFormData(key, value) {
+    const { formData } = this.data;
+    const data = { ...formData };
+    data[key] = value;
+    this.setData({
+      formData: data,
+    });
+    console.log(data)
+  },
+  input(e) {
+    const { value } = e.detail;
+    const { name } = e.target.dataset;
+    this.updateFormData(name, value)
+  },
   uploadPicture() {
     wx.chooseImage({
       success: res => {
+        // TODO 上传图片到服务器
         this.setData({
           picList: res.tempFilePaths,
         })
@@ -40,10 +64,30 @@ Page({
   },
   formSubmit(e) {
     const { value } = e.detail;
-    // TODO POST请求，发布贴子
+    // 判断空
+    if (!value.title || !value.content
+      || !value.location || !value.category) {
+      this.setData({
+        tip: '必填项不能为空！'
+      })
+    } else {
+      const { routerType } = this.data;
+      httpRequest({
+        url: `${routerType}/publish`,
+        method: 'POST',
+        data: value,
+      }).then(res => {
+        if (res.success) {
+          // TODO 跳转页面
+        }
+      })
+    }
   },
   formReset() {
     // 重置
+    this.setData({
+      picList: [],
+    })
   },
   /**
    * 生命周期函数--监听页面加载
@@ -54,7 +98,7 @@ Page({
       title: `发布${type2Word[type]}`
     });
     this.setData({
-      isLost: type === 'lost'
+      routerType: type
     })
   },
 

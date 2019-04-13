@@ -9,9 +9,15 @@ export const httpRequest = function (option) {
       option.header = option.header || {};
       option.header['Cookie'] = sessonId;
     }
+    // POST请求添加content-type
+    if (option.method === 'POST') {
+      option.header = option.header || {};
+      option.header['content-type'] = 'application/x-www-form-urlencoded';
+    }
     return new Promise((resolve, reject) => {
       wx.request({
         ...option,
+        url: `${base}${option.url}`,
         success: resolve,
         fail: reject,
       })
@@ -24,11 +30,8 @@ export const httpRequest = function (option) {
 // button 点击登录后 发送请求到服务端，获取userinfo
 export const decodeUserInfo = function (params, cb) {
   httpRequest({
-    url: `${base}/users/decodeUserInfo`,
+    url: `users/decodeUserInfo`,
     data: params,
-    header: {
-      "content-type": "application/x-www-form-urlencoded",
-    },
     method: 'POST',
   }).then(docinfo => {
     if (cb) {

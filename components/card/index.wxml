@@ -1,6 +1,6 @@
 <view class='main' bindtap='onTap' data-id="{{ list.id }}">
   <view class='title'>{{ list.title }}</view>
-  <view class='time'>{{ list.createTime }}</view>
+  <view class='time'>{{ list.time }}</view>
   <view class='content'>“{{ list.content}}”</view>
   <view wx:if="list.picture"  class='picture-cage'>
    <block wx:for="{{list.picture}}" wx:key="item">
@@ -15,8 +15,8 @@
   </view>
   <view class='related'>
     <view class='user'>
-      <image mode="aspectFit" src='../../static/images/home.png' class='icon'></image>
-      <view class='name'>{{ list.user }}</view>
+      <image mode="aspectFit" src="{{list.creator.avatarUrl}}" class='icon'></image>
+      <view class='name'>{{ list.creator.nickName }}</view>
     </view>
     <location-with-icon location="{{list.location}}" my-class="font"></location-with-icon>
   </view>

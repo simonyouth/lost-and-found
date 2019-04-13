@@ -1,23 +1,35 @@
 import { testList, testList2, defaultCityLocation } from '../../utils/store.js';
 import { qqmap } from '../../utils/util.js';
+import { httpRequest } from '../../utils/request';
 const app = getApp()
 
 Page({
   data: {
     activeIndex: 1,
-    list: testList,
-    foundList: testList2,
+    lostList: [],
+    foundList: [],
     customLocation: Object, // 选择的位置
     city: String,
     timeDesc: true, // 默认时间降序
+    keyWords: '',
+    pageNumLost: 0,
+    pageNumFound: 0,
+    lostTotal: 0, // 贴子总数
+    foundTotal: 0,
   },
   //事件处理函数
   changeSorter: function(e) {
     const { dataset: { activeIndex }} = e.target;
     this.setData({
       activeIndex: Number(activeIndex),
+    }, () => {
+      const { lostList, foundList } = this.data;
+      if ((activeIndex == 1 && lostList.length === 0)
+        || (activeIndex == 2 && foundList.length === 0)) {
+        this.search()
+      }
+
     });
-    // TODO 请求数据
   },
   onDetail: (e) => {
     // 从子组件传来的数据，存在detail中
@@ -30,7 +42,11 @@ Page({
   // 时间排序
   handleTime() {
     this.setData({
-      timeDesc: !this.data.timeDesc
+      timeDesc: !this.data.timeDesc,
+      pageNumFound: 0,
+      pageNumLost: 0,
+    }, () => {
+      this.search({ clear: true })
     })
   },
   toPublish() {
@@ -40,11 +56,6 @@ Page({
   },
   // 跳转到map
   navigateToMap() {
-    // 自定义的地图
-    // wx.navigateTo({
-    //   url: '../map/index',
-    // })
-
     // 小程序自带地图
     wx.chooseLocation({
         success: res => {
@@ -59,7 +70,15 @@ Page({
   // 搜索confirm
   handleSearch(e) {
     const { value } = e.detail;
-    console.log(value)
+    this.setData({
+      keyWords: value,
+      lostList: [],
+      foundList: [],
+      pageNumFound: 0,
+      pageNumLost: 0,
+    }, () => {
+      this.search({ clear: true });
+    });
   },
   // 地理位置逆转换
   reverseGeocoder(location) {
@@ -74,19 +93,71 @@ Page({
     });
   },
 
+  search(options = {}) {
+    wx.showNavigationBarLoading(); //在标题栏中显示加载
+    const { clear } = options;
+    const {
+      activeIndex,
+      timeDesc,
+      keyWords,
+      city,
+      pageNumLost,
+      pageNumFound,
+    } = this.data;
+    httpRequest({
+      url: `${activeIndex == 1 ? 'lost' : 'found'}/list`,
+      data: {
+        location: city,
+        keyWords,
+        timeOrder: timeDesc ? -1 : 1,
+        pageNum: activeIndex == 1 ? pageNumLost : pageNumFound,
+      }
+    }).then(res => {
+      wx.hideNavigationBarLoading();
+      wx.stopPullDownRefresh();
+
+      const { list, total } = res.data;
+      const { lostList, foundList } = this.data;
+
+      if (activeIndex == 1) {
+        let tempLost = clear ? list : [...lostList, ...list];
+        this.setData({
+          lostList: tempLost,
+          lostTotal: total,
+        })
+      } else {
+        let tempFound = clear ? list : [...foundList, ...list];
+        this.setData({
+          foundList: tempFound,
+          foundTotal: total,
+        })
+      }
+    })
+  },
+
+  onPullDownRefresh() {
+    this.search({ clear: true })
+  },
+  onReachBottom() {
+    const { lostTotal, foundTotal, foundList, lostList, activeIndex } = this.data;
+    if (activeIndex == 1 && lostTotal > lostList.length) {
+      this.setData({
+        pageNumLost: this.data.pageNumLost + 1
+      }, () => {
+        console.log(this.data.pageNumLost)
+        this.search()
+      });
+    } else if (activeIndex == 2 && foundTotal > foundList.length) {
+      this.setData({
+        pageNumFound: this.data.pageNumFound + 1
+      }, () => {
+        console.log(this.data.pageNumFound)
+        this.search()
+      });
+    }
+  },
   onLoad: function () {
     this.setUserInfo();
-    // 获取城市列表
-    qqmap.getCityList({
-      success: (res) => {
-        // console.log('省份数据：', res.result[0]); //打印省份数据
-        // console.log('城市数据：', res.result[1]); //打印城市数据
-        // console.log('区县数据：', res.result[2]); //打印区县数据
-      },
-      fail: (e) => {
-        console.log(e);
-      },
-    });
   },
 
   onShow() {
@@ -94,6 +165,7 @@ Page({
     wx.getLocation({
       type: 'gcj02',
       success: res => {
+        console.log(res)
         location = {
           latitude: res.latitude,
           longitude: res.longitude
@@ -111,7 +183,10 @@ Page({
             const { city } = addr.address_component;
             this.setData({
               city,
-            })
+            }, () => {
+              // 获取贴子列表
+              this.search({ clear: true })
+            });
           })
       }
     });

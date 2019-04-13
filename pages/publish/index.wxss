@@ -20,6 +20,9 @@
     font-size: 24rpx;
     color: red;
 }
+.ok {
+    visibility: hidden;
+}
 .picker {
     width: 100%;
 }
