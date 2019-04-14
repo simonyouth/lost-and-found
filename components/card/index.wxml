@@ -1,4 +1,4 @@
-<view class='main' bindtap='onTap' data-id="{{ list.id }}">
+<view class='main' bindtap='onTap' data-item="{{ list }}">
   <view class='title'>{{ list.title }}</view>
   <view class='time'>{{ list.time }}</view>
   <view class='content'>“{{ list.content}}”</view>

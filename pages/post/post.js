@@ -1,70 +1,68 @@
-// pages/post/post.js
+import { type } from '../../utils/store';
+import { handleUserInfo } from '../../utils/util';
+import {httpRequest} from "../../utils/request";
+const app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    id: String,
+    data: Object,
+    type: type,
+    id: app.globalData.id,
+    hidden: true, // modal管理窗
   },
-  onBroadcast: function(detail) {
+  onBroadcast() {
+    const { type, _id } = this.data.data;
     wx.navigateTo({
-      url: `/pages/broadcast/broadcast`,
+      url: `/pages/broadcast/broadcast?type=${type}&id=${_id}`,
     })
   },
-  toLetter() {
+  toLetter(e) {
+    if (!app.globalData.userInfo || !app.globalData.id) {
+      app.globalData.userInfo = handleUserInfo(e, (res) => {
+        app.globalData.id = res.data.id;
+        this.setData({
+          id: res.data.id,
+        });
+        wx.navigateTo({
+          url: `/pages/letterDetail/index`
+        })
+      });
+    }
     wx.navigateTo({
       url: `/pages/letterDetail/index`
     })
   },
+  setHidden() {
+    this.setData({ hidden: !this.data.hidden })
+  },
+  handleUpdate(e) {
+    const { type } = e.currentTarget.dataset;
+    const { _id } = this.data.data;
+    httpRequest({
+      url: 'lost/post/manage',
+      data: {
+        type,
+        id: _id
+      },
+      method: 'PUT'
+    });
+    this.setHidden();
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // TODO queryString取贴子ID，请求数据
-    const { id } = options;
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
+    console.log(app.globalData)
+    const { data } = options;
+    this.setData({
+      data: JSON.parse(data),
+      id: app.globalData.id
+    });
+    console.log(JSON.parse(data))
   },
 
   /**
@@ -73,4 +71,4 @@ Page({
   onShareAppMessage: function () {
 
   }
-})
+});

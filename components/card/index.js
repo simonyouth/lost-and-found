@@ -26,8 +26,8 @@ Component({
    */
   methods: {
     onTap(e) {
-      const { id } = e.target.dataset;
-      this.triggerEvent('ondetail', { id })
+      const { item } = e.currentTarget.dataset;
+      this.triggerEvent('ondetail', { item: item })
     },
     previewImage(e) {
       // 本地测试图片，无法预览

@@ -3,51 +3,43 @@
      <!-- <view class='offset-top'></view> -->
       <view class='header'>
         <view class='user'>
-          <image class='usericon' src='../../static/images/home.png'></image>
+          <image class='usericon' src="{{data.creator.avatarUrl}}"></image>
           <view class='name-time'>
-            <text class='username'>username</text>
-            <text class='time'>11:32更新</text>
+            <text class='username'>{{data.creator.nickName}}</text>
+            <text class='time'>创建于{{data.timeDetail}}</text>
           </view>
         </view>
         <view>
           <button
-            bindtap='onBroadcast'
-            size="mini"
-            id='normal-button'>添加留言
+              data-type="{{data.type}}"
+              bindtap='onBroadcast'
+              size="mini"
+              id='normal-button'>添加留言
           </button>
         </view>
       </view>
       <view class='line' />
       <view class='body'>
-        <view class='picture'>
+        <view class='picture' wx:for="{{data.imgList}}" wx:key="{{index}}">
           <image
             class='img'
             mode='widthFix'
-            src='../../static/images/home.png'>
+            src='{{item}}'>
           </image>
         </view>
-        <view class='content'>wx.navigateTo和 wx.redirectTo不允许跳转到 tab 所包含的页面，只能用 wx.switchTab跳转。需要注意的是， wx.switchTab中的 url不能传参数</view>
+        <view class='content'>{{data.content}}</view>
       </view>
       <view class='mark'>
-        <view>
-         <view class='tag offset-right'>生活用品</view>
-         <view class='tag'>日用品</view>
-        </view>
-        <location-with-icon location="望月公寓">
+         <view class='tag offset-right'>{{type[data.category].name}}</view>
+        <location-with-icon location="{{data.location}}" my-class="location">
         </location-with-icon>
       </view>
     </view>
     <label class="offset-left h">楼主留言</label>
     <scroll-view scroll-y class="scroll-view">
-        <view class="list-cage">
+        <view class="list-cage" wx:for="{{data.msgList}}" wx:key="{{index}}">
             <view class="list-item">
-               这个工资发你好打你你打hi你大会封建时代和附件客户方式打击阿富汗吧
-            </view>
-            <view class="list-item">
-                这个工资发你好打你你打hi你大会封建时代和附件客户方式打击阿富汗吧
-            </view>
-            <view class="list-item">
-                这个工资发你好打你你打hi你大会封建时代和附件客户方式打击阿富汗吧
+               {{item}}
             </view>
         </view>
     </scroll-view>
@@ -57,7 +49,14 @@
     <button open-type="share" id='normal-button' class='custom-button'>转发</button>
   </view>
   <!-- 是楼主则显示管理 -->
-  <view>
-    <button id='normal-button' class='custom-button' bindtap="toLetter">私信ta</button>
+  <view wx:if="{{id !== data.creator._id}}">
+    <button id='normal-button' class='custom-button' open-type="getUserInfo" bindgetuserinfo="toLetter">私信ta</button>
+  </view>
+  <view wx:else>
+    <button id='normal-button' class='custom-button' bindtap="setHidden">管理</button>
   </view>
 </view>
+<modal hidden="{{hidden}}" confirm-text="" no-cancel="true">
+  <view bindtap="handleUpdate" class="modal-item" data-type="solve">已解决</view>
+  <view bindtap="handleUpdate" class="modal-item no-border" data-type="delete">删除</view>
+</modal>

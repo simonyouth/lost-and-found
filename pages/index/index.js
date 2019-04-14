@@ -9,7 +9,6 @@ Page({
     activeIndex: 1,
     lostList: [],
     foundList: [],
-    customLocation: Object, // 选择的位置
     city: String,
     timeDesc: true, // 默认时间降序
     keyWords: '',
@@ -34,10 +33,9 @@ Page({
   },
   onDetail: (e) => {
     // 从子组件传来的数据，存在detail中
-    const { id } = e.detail;
-    console.log('点击！！', id);
+    const { item } = e.detail;
     wx.navigateTo({
-      url: `/pages/post/post?id=${id}`,
+      url: `/pages/post/post?data=${JSON.stringify(item)}`,
     })
   },
   // 时间排序
@@ -51,19 +49,33 @@ Page({
     })
   },
   toPublish(e) {
-    app.globalData.userInfo = handleUserInfo(e);
-    wx.navigateTo({
-      url: '../publishType/index'
-    })
+    if (!app.globalData.userInfo || !app.globalData.id) {
+      const info = handleUserInfo(e, (res) => {
+        app.globalData.id = res.data.id;
+      });
+      if (info) {
+        app.globalData.userInfo = info;
+        wx.navigateTo({
+          url: '../publishType/index'
+        })
+      }
+    } else {
+      wx.navigateTo({
+        url: '../publishType/index'
+      })
+    }
   },
   // 跳转到map
   navigateToMap() {
     // 小程序自带地图
     wx.chooseLocation({
         success: res => {
-          console.log(res)
-          this.setData({
-            customLocation: res,
+          this.reverseGeocoder(res).then(s => {
+            this.setData({
+              city: s.address_component.city,
+            }, () => {
+              this.search({ clear: true })
+            })
           })
         }
     });
@@ -88,7 +100,7 @@ Page({
       qqmap.reverseGeocoder({
         location,
         success: (addr) => {
-          const { city } = addr.result.address_component;
+          // const { city } = addr.result.address_component;
           resolve(addr.result);
         },
       })
@@ -159,15 +171,14 @@ Page({
     }
   },
   onLoad: function () {
-    this.setUserInfo();
+    this.getLocation();
   },
 
-  onShow() {
+  getLocation() {
     let location = defaultCityLocation;
     wx.getLocation({
       type: 'gcj02',
       success: res => {
-        console.log(res)
         location = {
           latitude: res.latitude,
           longitude: res.longitude
@@ -218,12 +229,4 @@ Page({
       })
     }
   },
-  getUserInfo: function(e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
-    })
-  }
 })

@@ -44,7 +44,6 @@ Page({
     this.setData({
       formData: data,
     });
-    console.log(data)
   },
   input(e) {
     const { value } = e.detail;
@@ -77,8 +76,19 @@ Page({
         method: 'POST',
         data: value,
       }).then(res => {
-        if (res.success) {
-          // TODO 跳转页面
+        if (res.data.success) {
+          wx.showToast({
+            title: '发布成功',
+            icon: 'success'
+          });
+          const pages = getCurrentPages();
+          console.log(pages)
+          const home = pages[0];
+          home.search({ clear: true });
+
+          wx.switchTab({
+            url: '/pages/index/index'
+          })
         }
       })
     }

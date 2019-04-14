@@ -46,8 +46,15 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: nowrap;
+  font-size: 28rpx;
 }
-
+.location {
+  width: 220rpx;
+  overflow: hidden;
+  word-break: keep-all;
+  text-overflow: ellipsis;
+}
 .action-bar {
   padding-top: 20rpx;
   padding-bottom: 20rpx;
@@ -78,4 +85,12 @@
 .h {
   font-size: 30rpx;
   font-weight: bold;
+}
+.modal-item {
+  padding: 20rpx;
+  border-bottom: 2rpx solid #e2e2e2;
+  color: #000000;
+}
+.no-border {
+  border-bottom-style: none;
 }

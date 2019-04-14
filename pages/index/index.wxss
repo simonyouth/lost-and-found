@@ -62,6 +62,7 @@
 .find {
   width: 110rpx;
   height: 110rpx;
+  line-height: 45rpx;
   border-radius: 50%;
   display: flex;
   justify-content: center;

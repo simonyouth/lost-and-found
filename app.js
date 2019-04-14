@@ -1,4 +1,3 @@
-import base from './utils/config.js';
 import { httpRequest } from './utils/request.js';
 
 App({
@@ -31,6 +30,7 @@ App({
   },
   globalData: {
     userInfo: null,
+    id: null,
     statusBarHeight: wx.getSystemInfoSync()['statusBarHeight']
   }
 });

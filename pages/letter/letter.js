@@ -12,11 +12,17 @@ Page({
   },
 
   onGotUserInfo(e) {
-    const userInfo = handleUserInfo(e);
-    app.globalData.userInfo = userInfo;
-    this.setData({
-      userInfo,
-    })
+    if (!app.globalData.userInfo) {
+      const userInfo = handleUserInfo(e, (res) => {
+        app.globalData.id = res.data.id;
+      });
+      if (userInfo) {
+        app.globalData.userInfo = userInfo;
+        this.setData({
+          userInfo,
+        })
+      }
+    }
   },
   /**
    * 生命周期函数--监听页面加载
