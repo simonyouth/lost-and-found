@@ -1,7 +1,8 @@
-import { testList, testList2, defaultCityLocation } from '../../utils/store.js';
+import { defaultCityLocation } from '../../utils/store.js';
 import { qqmap } from '../../utils/util.js';
 import { httpRequest } from '../../utils/request';
-const app = getApp()
+import { handleUserInfo } from '../../utils/util';
+const app = getApp();
 
 Page({
   data: {
@@ -49,7 +50,8 @@ Page({
       this.search({ clear: true })
     })
   },
-  toPublish() {
+  toPublish(e) {
+    app.globalData.userInfo = handleUserInfo(e);
     wx.navigateTo({
       url: '../publishType/index'
     })
@@ -193,10 +195,7 @@ Page({
   },
   setUserInfo: function () {
     if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
+
     } else if (this.data.canIUse) {
       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
       // 所以此处加入 callback 以防止这种情况

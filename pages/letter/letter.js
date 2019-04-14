@@ -1,3 +1,4 @@
+import { handleUserInfo } from '../../utils/util';
 const app = getApp();
 
 Page({
@@ -10,6 +11,13 @@ Page({
     letterList: [1,2,3]
   },
 
+  onGotUserInfo(e) {
+    const userInfo = handleUserInfo(e);
+    app.globalData.userInfo = userInfo;
+    this.setData({
+      userInfo,
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

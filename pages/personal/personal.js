@@ -1,5 +1,6 @@
 import { settingList } from '../../utils/store';
 import { decodeUserInfo } from '../../utils/request';
+import { handleUserInfo } from '../../utils/util';
 const app = getApp();
 Page({
 
@@ -36,12 +37,7 @@ Page({
     }
   },
   onGotUserInfo(e) {
-    console.log(e);
-    const { encryptedData, iv, userInfo } = e.detail;
-    decodeUserInfo({
-      encryptedData,
-      iv,
-    });
+    const userInfo = handleUserInfo(e);
     app.globalData.userInfo = userInfo;
     this.setData({
       userInfo,
