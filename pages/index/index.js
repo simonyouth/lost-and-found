@@ -49,10 +49,8 @@ Page({
     })
   },
   toPublish(e) {
-    if (!app.globalData.userInfo || !app.globalData.id) {
-      const info = handleUserInfo(e, (res) => {
-        app.globalData.id = res.data.id;
-      });
+    if (!app.globalData.userInfo) {
+      const info = handleUserInfo(e, app);
       if (info) {
         app.globalData.userInfo = info;
         wx.navigateTo({

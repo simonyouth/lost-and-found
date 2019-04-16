@@ -37,9 +37,7 @@ Page({
     }
   },
   onGotUserInfo(e) {
-    const userInfo = handleUserInfo(e, (res) => {
-      app.globalData.id = res.data.id;
-    });;
+    const userInfo = handleUserInfo(e, app);
     app.globalData.userInfo = userInfo;
     this.setData({
       userInfo,

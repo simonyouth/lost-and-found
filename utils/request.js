@@ -28,14 +28,16 @@ export const httpRequest = function (option) {
 };
 
 // button 点击登录后 发送请求到服务端，获取userinfo
-export const decodeUserInfo = function (params, cb) {
-  httpRequest({
-    url: `users/decodeUserInfo`,
-    data: params,
-    method: 'POST',
-  }).then(docinfo => {
-    if (cb) {
-      cb(docinfo)
-    }
-  });
+export const decodeUserInfo = function (params, app, cb) {
+  if (!app.globalData.id) {
+    // 新用户，解密数据
+    httpRequest({
+      url: `users/decodeUserInfo`,
+      data: params,
+      method: 'POST',
+    }).then(docinfo => {
+      app.globalData.id = docinfo.data.id;
+      cb && cb(docinfo.data)
+    });
+  }
 };

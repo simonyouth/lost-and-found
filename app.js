@@ -1,4 +1,4 @@
-import { httpRequest } from './utils/request.js';
+import { httpRequest, initWs } from './utils/request.js';
 
 App({
   onLaunch: function () {
@@ -6,6 +6,7 @@ App({
       index: 1,
       text: '123',
     });
+    initWs();
     // 登录
     wx.login({
       success: res => {
@@ -22,6 +23,7 @@ App({
            if (sessionID) {
              wx.setStorageSync('sessionId', sessionID);
            }
+           this.globalData.id = alldata.data.id || null;
           })
         }
       }

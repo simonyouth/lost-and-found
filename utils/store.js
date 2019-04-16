@@ -7,10 +7,12 @@ export const settingList = [{
 }, {
   title: '手机认证',
   key: 'confirm',
-}, {
-  title: '用户投诉',
-  key: 'complaint',
-}];
+}, 
+// {
+//   title: '用户投诉',
+//   key: 'complaint',
+// }
+];
 
 // 北京的经纬度
 export const defaultCityLocation = {

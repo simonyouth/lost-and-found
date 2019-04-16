@@ -23,6 +23,7 @@ Page({
     this.setData({
       id: options.id,
       type: options.type,
+      userInfo: app.globalData.userInfo
     });
     console.log(options)
   },

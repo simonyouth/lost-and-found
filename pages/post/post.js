@@ -20,11 +20,10 @@ Page({
     })
   },
   toLetter(e) {
-    if (!app.globalData.userInfo || !app.globalData.id) {
-      app.globalData.userInfo = handleUserInfo(e, (res) => {
-        app.globalData.id = res.data.id;
+    if (app.globalData.userInfo) {
+      app.globalData.userInfo = handleUserInfo(e, app, (res) => {
         this.setData({
-          id: res.data.id,
+          id: res.id,
         });
         wx.navigateTo({
           url: `/pages/letterDetail/index`

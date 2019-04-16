@@ -13,9 +13,7 @@ Page({
 
   onGotUserInfo(e) {
     if (!app.globalData.userInfo) {
-      const userInfo = handleUserInfo(e, (res) => {
-        app.globalData.id = res.data.id;
-      });
+      const userInfo = handleUserInfo(e, app);
       if (userInfo) {
         app.globalData.userInfo = userInfo;
         this.setData({
@@ -23,6 +21,28 @@ Page({
         })
       }
     }
+  },
+
+  /**
+   * 分类
+   * @param letters {Array}
+   * @return { A: {}, B: {}}
+   */
+  listLetters(letters) {
+    const current = app.globalData.id;
+    const result = {};
+    for (const item of letters) {
+      const { creator, receiver } = item;
+      let temp = creator;
+      if (creator['_id'] === current) {
+        temp = receiver;
+      }
+      if (!result.hasOwnProperty(temp['_id'])) {
+        result[temp['_id']] = [];
+      }
+      result[temp['_id']].push(item);
+    }
+    return result;
   },
   /**
    * 生命周期函数--监听页面加载
