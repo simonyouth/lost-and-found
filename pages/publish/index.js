@@ -1,6 +1,6 @@
 import { formList } from './constant';
 import { type } from '../../utils/store';
-import { httpRequest } from '../../utils/request';
+import { httpRequest, uploadImg } from '../../utils/request';
 
 const type2Word = { lost: '失物贴', found: '寻物贴' };
 Page({
@@ -53,16 +53,15 @@ Page({
   uploadPicture() {
     wx.chooseImage({
       success: res => {
-        // TODO 上传图片到服务器
         this.setData({
           picList: res.tempFilePaths,
         })
-
       }
     });
   },
   formSubmit(e) {
     const { value } = e.detail;
+    const { picList } = this.data;
     // 判断空
     if (!value.title || !value.content
       || !value.location || !value.category) {
@@ -70,27 +69,36 @@ Page({
         tip: '必填项不能为空！'
       })
     } else {
-      const { routerType } = this.data;
-      httpRequest({
-        url: `${routerType}/publish`,
-        method: 'POST',
-        data: value,
-      }).then(res => {
-        if (res.data.success) {
-          wx.showToast({
-            title: '发布成功',
-            icon: 'success'
-          });
-          const pages = getCurrentPages();
-          console.log(pages)
-          const home = pages[0];
-          home.search({ clear: true });
+      wx.showLoading({
+        title: '发布中',
+      });
+      // 发布时上传图片到服务器
+      const arr = picList.map(path => uploadImg(path));
+      Promise.all(arr)
+        .then(urls => {
+          const imgList = urls.map(v => JSON.parse(v.data).data);
+          const { routerType } = this.data;
+          // 发布请求
+          httpRequest({
+            url: `${routerType}/publish`,
+            method: 'POST',
+            data: {
+              ...value,
+              imgList,
+            },
+          }).then(res => {
+            if (res.data.success) {
+              wx.hideLoading();
+              const pages = getCurrentPages();
+              const home = pages[0];
+              home.search({ clear: true });
 
-          wx.switchTab({
-            url: '/pages/index/index'
+              wx.switchTab({
+                url: '/pages/index/index'
+              })
+            }
           })
-        }
-      })
+        });
     }
   },
   formReset() {
@@ -113,13 +121,6 @@ Page({
   },
 
   /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
@@ -132,32 +133,4 @@ Page({
   onHide: function () {
 
   },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })
