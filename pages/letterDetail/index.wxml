@@ -1,40 +1,61 @@
 <scroll-view
    scroll-y
+   scrollTop="{{scrollTop}}"
    style="height: {{scrollHeight}}"
 >
-<view class="chat">
-  <view>
-    <view class="bubble ta">
-      ninh
-    </view>
+<view class="chat" wx:for="{{list}}">
+  <view wx:if="{{receiver !== item.receiver._id}}">
+    <block wx:if="{{item.type === 'text'}}">
+      <view class="bubble ta">
+        {{item.content}}
+      </view>
+    </block>
+    <block wx:else>
+      <block wx:for="{{item.content}}" wx:for-item="url">
+        <view class="bfc">
+          <view class="bubble me">
+            <image src="{{url}}" mode="widthFix" class="img"></image>
+          </view>
+        </view>
+      </block>
+    </block>
   </view>
-  <block wx:for="{{test}}" wx:key="{{index}}">
-  <view class="bfc">
-    <view class="bubble me">
-      hihhhhhhhh1222222222222223213
-      1232132121312312
-      213213
-    </view>
-  </view>
+
+  <block wx:else>
+    <block wx:if="{{item.type === 'text'}}">
+      <view class="bfc" >
+        <view class="bubble me">
+          {{item.content}}
+        </view>
+      </view>
+    </block>
+    <block wx:else>
+      <block wx:for="{{item.content}}" wx:for-item="url" wx:key="{{url}}">
+        <view class="bfc">
+          <view class="bubble me">
+            <image
+                src="{{url}}"
+                mode="widthFix"
+                class="img"
+                data-url="{{url}}"
+                bindtap="previewImage"></image>
+          </view>
+        </view>
+      </block>
+    </block>
   </block>
 
-  <block wx:for="{{tempImagePath}}">
-    <view class="bfc">
-      <view class="bubble me">
-       <image src="{{item}}" mode="widthFix" class="img"></image>
-      </view>
-    </view>
-  </block>
 </view>
 </scroll-view>
 
 <view class="send">
   <textarea
-        bindblur="loseBlur"
-        bindinput="handleInput"
-        bindconfirm="send"
-        auto-height
-        class="input text"/>
+      value="{{message}}"
+      bindblur="loseBlur"
+      bindinput="handleInput"
+      bindconfirm="send"
+      auto-height
+      class="input text"/>
   <text class="text offset" bindtap="send">发送</text>
   <text class="text" bindtap="showPic">图片</text>
 </view>

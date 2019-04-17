@@ -49,12 +49,12 @@
     <button open-type="share" id='normal-button' class='custom-button'>转发</button>
   </view>
   <!-- 是楼主则显示管理 -->
-  <view wx:if="{{id !== data.creator._id}}">
+  <!--<view wx:if="{{id !== data.creator._id}}">-->
     <button id='normal-button' class='custom-button' open-type="getUserInfo" bindgetuserinfo="toLetter">私信ta</button>
-  </view>
-  <view wx:else>
+  <!--</view>-->
+  <!--<view wx:else>-->
     <button id='normal-button' class='custom-button' bindtap="setHidden">管理</button>
-  </view>
+  <!--</view>-->
 </view>
 <modal hidden="{{hidden}}" confirm-text="" no-cancel="true">
   <view bindtap="handleUpdate" class="modal-item" data-type="solve">已解决</view>

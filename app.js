@@ -2,11 +2,6 @@ import { httpRequest, initWs } from './utils/request.js';
 
 App({
   onLaunch: function () {
-    wx.setTabBarBadge({
-      index: 1,
-      text: '123',
-    });
-    initWs();
     // 登录
     wx.login({
       success: res => {
@@ -23,12 +18,47 @@ App({
            if (sessionID) {
              wx.setStorageSync('sessionId', sessionID);
            }
-           this.globalData.id = alldata.data.id || null;
+           const { userinfo } = alldata.data;
+           if (userinfo) {
+             // 老用户，保存id，创建ws连接
+             this.globalData.id = userinfo._id;
+             this.globalData.userInfo = {
+               nickName: userinfo.nickName,
+               avatarUrl: userinfo.avatarUrl,
+             };
+             // 获取未读消息
+             this.getUnreadCount();
+             // ws连接
+             this.globalData.localSocket = initWs(userinfo._id);
+             this.globalData.localSocket.onMessage((data) => {
+               this.getUnreadCount();
+             })
+           }
           })
         }
       }
     })
-    // 获取用户信息
+  },
+
+  getUnreadCount() {
+    httpRequest({
+      url: 'letter/unread',
+    }).then(res => {
+      wx.setTabBarBadge({
+        index: 1,
+        text: res.data.count && res.data.count + '',
+      })
+    })
+  },
+  onShow() {
+    if ( this.globalData.id && this.globalData.localSocket.readyState !== 0
+      &&  this.globalData.localSocket.readyState !== 1) {
+      console.log('重连ws');
+      this.globalData.localSocket = initWs(this.globalData.id);
+    }
+  },
+  onHide() {
+    this.globalData.localSocket && this.globalData.localSocket.close();
   },
   globalData: {
     userInfo: null,

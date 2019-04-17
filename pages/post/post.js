@@ -30,8 +30,10 @@ Page({
         })
       });
     }
+    console.log(this.data.data)
+    const { creator } = this.data.data;
     wx.navigateTo({
-      url: `/pages/letterDetail/index`
+      url: `/pages/letterDetail/index?receiver=${JSON.stringify(creator)}`
     })
   },
   setHidden() {

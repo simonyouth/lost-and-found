@@ -1,5 +1,5 @@
 // 封装wx.request成Promise
-import base from "./config";
+import base, { imgUrl } from "./config";
 
 export const httpRequest = function (option) {
   try {
@@ -17,7 +17,7 @@ export const httpRequest = function (option) {
     return new Promise((resolve, reject) => {
       wx.request({
         ...option,
-        url: `${base}${option.url}`,
+        url: option.noBase ? option.url : `${base}${option.url}`,
         success: resolve,
         fail: reject,
       })
@@ -35,9 +35,50 @@ export const decodeUserInfo = function (params, app, cb) {
       url: `users/decodeUserInfo`,
       data: params,
       method: 'POST',
-    }).then(docinfo => {
-      app.globalData.id = docinfo.data.id;
-      cb && cb(docinfo.data)
+    }).then(({data}) => {
+      app.globalData.id = data.id;
+      // 新用户登录后创建ws连接
+      app.globalData.localSocket = initWs(data.id);
+      cb && cb(data)
     });
   }
 };
+
+export function uploadImg(file) {
+  return new Promise((resolve, reject) => {
+    wx.uploadFile({
+      url: imgUrl,
+      filePath: file,
+      name: 'file',
+      formData: null,
+      success: (res) => resolve(res),
+      fail: (err) => reject(err),
+    })
+  })
+}
+
+// WebSocket连接
+// ws.readyState 0:CONNECTING 1:OPEN 2:CLOSING 3:Closed
+export function initWs(id) {
+  const ws = wx.connectSocket({
+    url: `ws://127.0.0.1:8081`,
+  });
+  ws.onOpen(res => {
+    wx.sendSocketMessage({
+      data: JSON.stringify({ msg: '这是测试的哦', id}),
+    })
+  });
+
+  ws.onMessage(res => {
+    console.log(res)
+  });
+
+  ws.onClose(res => {
+    console.error('...end.........')
+    wx.sendSocketMessage({
+      data: JSON.stringify({ close: true, id})
+    })
+  });
+console.log(ws)
+  return ws;
+}

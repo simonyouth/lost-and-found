@@ -1,4 +1,5 @@
 import { handleUserInfo } from '../../utils/util';
+import {httpRequest} from "../../utils/request";
 const app = getApp();
 
 Page({
@@ -8,7 +9,8 @@ Page({
    */
   data: {
     userInfo: app.globalData.userInfo,
-    letterList: [1,2,3]
+    letterList: [],
+    list: [],
   },
 
   onGotUserInfo(e) {
@@ -44,6 +46,35 @@ Page({
     }
     return result;
   },
+
+  // 获取私信
+  getLetter() {
+    httpRequest({
+      url: 'letter/all',
+    }).then(res => {
+      const { list: data } = res.data;
+      const list = this.listLetters(data);
+      // 取每组数据的最后一条
+      const lastList = [];
+      for (const key in list) {
+        if (list.hasOwnProperty(key)) {
+          const arr = list[key];
+          const newest = arr[arr.length - 1];
+          lastList.push({
+            content: newest.type === 'text' ? newest.content: '[图片]',
+            createTime: newest.createTime.split('T')[0],
+            friend: newest.creator._id === app.globalData.id
+              ? newest.receiver
+              : newest.creator,
+          });
+        }
+      }
+      this.setData({
+        letterList: list,
+        list: lastList,
+      })
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -53,11 +84,14 @@ Page({
     });
     this.setData({
       userInfo: app.globalData.userInfo
-    })
+    });
+    this.getLetter();
   },
   onTap(e) {
+    const { friend } = e.currentTarget.dataset;
+    const { letterList } = this.data;
     wx.navigateTo({
-      url: '/pages/letterDetail/index'
+      url: `/pages/letterDetail/index?receiver=${JSON.stringify(friend)}&data=${JSON.stringify(letterList[friend._id])}`
     })
   },
   /**
