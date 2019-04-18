@@ -4,6 +4,18 @@
   box-shadow: 2px 2px 1px rgb(181, 187, 158);
   border-radius: 10rpx;
   background-color: #fff;
+  position: relative;
+}
+.solve {
+  padding: 10rpx;
+  transform:rotate(40deg);
+  right: 0rpx;
+  top: 18rpx;
+  position: absolute;
+}
+.solve-img {
+  width: 120rpx;
+  height: 120rpx;
 }
 .title {
   font-size: 11pt;
@@ -11,7 +23,8 @@
 }
 .time {
   float: right;
-  font-size: 18rpx;
+  font-weight: bold;
+  font-size: 24rpx;
   color: rgb(117, 119, 109);
 }
 .content {

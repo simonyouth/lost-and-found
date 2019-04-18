@@ -1,4 +1,7 @@
 <view class='main' bindtap='onTap' data-item="{{ list }}">
+  <view class="solve" wx:if="{{ list.isSolve}}">
+    <image src="./images/solve.png" class="solve-img"></image>
+  </view>
   <view class='title'>{{ list.title }}</view>
   <view class='time'>{{ list.time }}</view>
   <view class='content'>“{{ list.content}}”</view>
