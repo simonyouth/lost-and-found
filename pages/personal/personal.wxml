@@ -9,10 +9,10 @@
           <view class="time">创建于 2019/4/3</view>
         </view>
       </view>
-      <!-- 编辑个人信息 -->
-      <view>
-        <button id='normal-button'>编辑</button>
-      </view>
+      <!--&lt;!&ndash; 编辑个人信息 &ndash;&gt;-->
+      <!--<view>-->
+        <!--<button id='normal-button'>编辑</button>-->
+      <!--</view>-->
 
     </view>
 

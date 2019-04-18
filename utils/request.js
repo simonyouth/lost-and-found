@@ -1,5 +1,5 @@
 // 封装wx.request成Promise
-import base, { imgUrl } from "./config";
+import { base, imgUrl } from "./config";
 
 export const httpRequest = function (option) {
   try {

@@ -12,21 +12,14 @@ Page({
 
   // 发送图片，本地相册或者拍摄上传
   showPic() {
-    const { tempImagePath } = this.data;
-    const paths = tempImagePath.slice();
     wx.chooseImage({
       success: res => {
-        console.log(res);
-        paths.push(res.tempFilePaths);
         const arr = res.tempFilePaths.map(path => uploadImg(path));
         Promise.all(arr)
           .then(urls => {
-            console.log(urls);
             const message = urls.map(v => JSON.parse(v.data).data);
-            console.log(message);
-            this.send({ imgUrls: message, type: 'image' });
+            this.send({ imgUrls: message, msgType: 'image' });
           });
-
       }
     });
   },
@@ -48,7 +41,7 @@ Page({
     })
   },
   send(options = {}) {
-    const { imgUrls, type } = options;
+    const { imgUrls, msgType } = options;
     const { message, receiver } = this.data;
     if (imgUrls || message) {
       // 发送消息
@@ -56,7 +49,7 @@ Page({
         url: 'letter/send',
         data: {
           content: imgUrls || message,
-          type: type || 'text',
+          type: msgType || 'text',
           receiver,
         },
         method: 'POST'
@@ -101,6 +94,21 @@ Page({
       current: url,
     })
   },
+
+  // 标为已读
+  hasRead() {
+    const { receiver } = this.data;
+    httpRequest({
+      url: 'letter/changestatus',
+      method: 'PUT',
+      data: {
+        receiver,
+        type: 'read'
+      }
+    }).then(res => {
+      app.getUnreadCount()
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -121,6 +129,7 @@ Page({
       receiver: _id,
     }, () => {
       !data ? this.getMessage() : '';
+      this.hasRead();
     });
 
     wx.setNavigationBarTitle({

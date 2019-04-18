@@ -1,7 +1,11 @@
-
-<view wx:if="{{userInfo}}" class="letter">
+<view wx:if="{{userInfo}}" class="letter bfc">
+  <view class="clickableText offset-top">
+    <text class="offset-right" data-action="readAll" bindtap="handleMark">全部标为已读</text>
+    <!--<text bindtap="handleMark" data-action="delete">清除全部消息</text>-->
+    <text class="tip">长按对话，可具体操作单个对话</text>
+  </view>
   <block wx:for="{{list}}" wx:key="{{index}}">
-    <view class="person" bindtap="onTap" data-friend="{{item.friend}}">
+    <view class="person" bindtap="onTap" bindlongpress="handleMark" data-friend="{{item.friend}}">
       <!-- user info -->
       <view class="user">
         <image src="{{item.friend.avatarUrl}}" class="circle-big-icon"/>

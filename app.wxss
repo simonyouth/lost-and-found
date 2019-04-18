@@ -73,6 +73,18 @@
 .offset-right {
   margin-right: 20rpx;
 }
+.offset-top {
+  margin-top: 20rpx;
+}
 .bfc {
   overflow: auto;  /* 触发BFC */
 }
+
+ .clickableText {
+   font-size: 28rpx;
+   color: rgb(251,114,153);
+ }
+ .tip {
+   font-size: 26rpx;
+   color: #cccccc;
+ }

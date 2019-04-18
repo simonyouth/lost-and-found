@@ -44,10 +44,16 @@ App({
     httpRequest({
       url: 'letter/unread',
     }).then(res => {
-      wx.setTabBarBadge({
-        index: 1,
-        text: res.data.count && res.data.count + '',
-      })
+      if (res.data.count) {
+        wx.setTabBarBadge({
+          index: 1,
+          text: res.data.count+ '',
+        })
+      } else {
+        wx.removeTabBarBadge({
+          index: 1,
+        })
+      }
     })
   },
   onShow() {
