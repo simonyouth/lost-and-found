@@ -23,24 +23,25 @@
     "enablePullDownRefresh": true
   },
   "tabBar": {
+    "selectedColor": "#fb7299",
     "list": [
       {
         "pagePath": "pages/index/index",
         "text": "首页",
         "iconPath": "static/images/home.png",
-        "selectedIconPath": "static/images/home.png"
+        "selectedIconPath": "static/images/home-active.png"
       },
       {
         "pagePath": "pages/letter/letter",
         "text": "消息",
-        "iconPath": "static/images/home.png",
-        "selectedIconPath": "static/images/home.png"
+        "iconPath": "static/images/message.png",
+        "selectedIconPath": "static/images/message-active.png"
       },
       {
         "pagePath": "pages/personal/personal",
         "text": "个人中心",
-        "iconPath": "static/images/home.png",
-        "selectedIconPath": "static/images/home.png"
+        "iconPath": "static/images/person.png",
+        "selectedIconPath": "static/images/person-acticed.png"
       }
     ]
   }
