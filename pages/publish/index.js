@@ -1,5 +1,5 @@
 import { formList } from './constant';
-import { type } from '../../utils/store';
+import { type, tipsForSafe } from '../../utils/store';
 import { httpRequest, uploadImg } from '../../utils/request';
 
 const type2Word = { lost: '失物贴', found: '寻物贴' };
@@ -15,6 +15,7 @@ Page({
     picList: [], // 图片列表
     formData: {},
     tip: '*', // 必填提示
+    tipsForSafe: tipsForSafe,
   },
 
   toMap(e) {

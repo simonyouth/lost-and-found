@@ -40,12 +40,12 @@ Page({
     this.setData({ hidden: !this.data.hidden })
   },
   handleUpdate(e) {
-    const { type } = e.currentTarget.dataset;
-    const { _id } = this.data.data;
+    const { type: action } = e.currentTarget.dataset;
+    const { _id, type } = this.data.data;
     httpRequest({
-      url: 'lost/post/manage',
+      url: `${type}/post/manage`,
       data: {
-        type,
+        type: action,
         id: _id
       },
       method: 'PUT'

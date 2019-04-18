@@ -38,3 +38,13 @@
     background-color: rgb(251,114,153);
     color: #ffffff;
 }
+
+.tip-cage {
+    padding: 20rpx;
+    margin-top: 60rpx;
+    font-size: 24rpx;
+    color: #808090;
+}
+.tip-safe {
+    margin-top: 6rpx;
+}

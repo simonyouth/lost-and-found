@@ -71,3 +71,9 @@
         </view>
     </form>
 </view>
+
+<view class="tip-cage">
+    <view class="tip-safe" wx:for="{{tipsForSafe}}" wx:key="{{index}}">
+        {{item}}
+    </view>
+</view>
