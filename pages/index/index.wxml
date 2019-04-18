@@ -9,6 +9,18 @@
     <view bindtap="handleTime" class="clickableText">
       {{timeDesc ? '时间降序' : '时间升序'}}
     </view>
+
+      <picker
+          class="picker"
+          data-name="category"
+          range-key="name"
+          bindchange="pickerChange"
+          bindcancel="pickerCancel"
+          value="{{index}}"
+          range="{{sortType}}">
+        <view class="label {{index > -1 ? 'category' : ''}}">{{index > -1 ? '#'+sortType[index].name : '选择类别'}}</view>
+      </picker>
+
   </view>
   <view class="lost title {{activeIndex === 1 ? 'actived' : ''}}" bindtap='changeSorter' data-active-index="1">失物贴</view>
   <view class="found title {{activeIndex === 2 ? 'actived' : ''}}" bindtap='changeSorter' data-active-index="2">寻物贴</view>

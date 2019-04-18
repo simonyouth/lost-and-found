@@ -1,4 +1,4 @@
-import { defaultCityLocation } from '../../utils/store.js';
+import { defaultCityLocation, type } from '../../utils/store.js';
 import { qqmap } from '../../utils/util.js';
 import { httpRequest } from '../../utils/request';
 import { handleUserInfo } from '../../utils/util';
@@ -6,16 +6,18 @@ const app = getApp();
 
 Page({
   data: {
-    activeIndex: 1,
+    activeIndex: 1, // 失物帖or寻物帖
     lostList: [],
     foundList: [],
-    city: String,
+    city: '', // 城市名称
     timeDesc: true, // 默认时间降序
-    keyWords: '',
-    pageNumLost: 0,
-    pageNumFound: 0,
-    lostTotal: 0, // 贴子总数
-    foundTotal: 0,
+    keyWords: '', // 关键字
+    pageNumLost: 0, // 失物帖分页
+    pageNumFound: 0, // 寻物帖分页
+    lostTotal: 0, // 失物帖总数
+    foundTotal: 0, // 寻物帖总数
+    sortType: type, // 类别picker
+    index: -1, // 选中的类别index
   },
   //事件处理函数
   changeSorter: function(e) {
@@ -48,6 +50,26 @@ Page({
       this.search({ clear: true })
     })
   },
+  pickerChange(e) {
+    console.log(e)
+    const { value } = e.detail;
+    this.setData({
+      index: Number(value),
+      pageNumLost: 0,
+      pageNumFound: 0,
+    }, () => {
+      this.search({ clear: true })
+    })
+  },
+  pickerCancel() {
+    this.setData({
+      index: -1,
+      pageNumLost: 0,
+      pageNumFound: 0,
+    }, () => {
+      this.search({ clear: true })
+    })
+  },
   toPublish(e) {
     if (!app.globalData.userInfo) {
       const info = handleUserInfo(e, app);
@@ -69,6 +91,8 @@ Page({
     wx.chooseLocation({
         success: res => {
           this.reverseGeocoder(res).then(s => {
+            console.log(res);
+            console.log(s)
             this.setData({
               city: s.address_component.city,
             }, () => {
@@ -115,15 +139,24 @@ Page({
       city,
       pageNumLost,
       pageNumFound,
+      index,
     } = this.data;
+    // 请求参数
+    const params = {
+      location: city,
+      timeOrder: timeDesc ? -1 : 1,
+      pageNum: activeIndex == 1 ? pageNumLost : pageNumFound,
+    };
+    if (index > -1) {
+      params.category = index;
+    }
+    if (keyWords) {
+      params.keyWords = keyWords;
+    }
+
     httpRequest({
       url: `${activeIndex == 1 ? 'lost' : 'found'}/list`,
-      data: {
-        location: city,
-        keyWords,
-        timeOrder: timeDesc ? -1 : 1,
-        pageNum: activeIndex == 1 ? pageNumLost : pageNumFound,
-      }
+      data: params,
     }).then(res => {
       wx.hideNavigationBarLoading();
       wx.stopPullDownRefresh();
