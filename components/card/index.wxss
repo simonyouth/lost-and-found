@@ -44,6 +44,7 @@
 }
 .related {
   display: flex;
+  flex-wrap: nowrap;
   justify-content: space-between;
   align-items: center;
   margin-top: 30rpx;
@@ -67,5 +68,9 @@
   height: 40rpx;
 }
 .font {
-  font-size: 24rpx;
+  font-size: 26rpx;
+}
+.location {
+  /*width: 180rpx;*/
+  font-size: 26rpx;
 }

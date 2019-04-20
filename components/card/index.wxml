@@ -3,7 +3,7 @@
     <image src="./images/solve.png" class="solve-img"></image>
   </view>
   <view class='title'>{{ list.title }}</view>
-  <view class='time'>{{ list.time }}</view>
+  <view class='time'>{{ list.updateAt }}</view>
   <view class='content'>“{{ list.content}}”</view>
   <view wx:if="list.picture"  class='picture-cage'>
    <block wx:for="{{list.picture}}" wx:key="item">
@@ -21,6 +21,6 @@
       <image mode="aspectFit" src="{{list.creator.avatarUrl}}" class='icon'></image>
       <view class='name'>{{ list.creator.nickName }}</view>
     </view>
-    <location-with-icon location="{{list.location}}" my-class="font"></location-with-icon>
+    <location-with-icon location="{{list.location}}" my-class="location"></location-with-icon>
   </view>
 </view>

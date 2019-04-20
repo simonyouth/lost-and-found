@@ -1,7 +1,7 @@
 <view class='top-bar'>
   <view class="filter-box">
-    <view class="city" bindtap="navigateToMap">
-     <location-with-icon location="{{city}}" my-class="filter-font"/>
+    <view class="city">
+     <location-with-icon location="{{city}}" my-class="filter-font" hasEvent="true" bindtap="navigateToMap"/>
     </view>
     <view>
       <search my-class="search" bindconfirm="handleSearch"/>
@@ -33,6 +33,5 @@
 </view>
 <view class='show-more'>没有更多数据了</view>
 <button class='find' bindgetuserinfo="toPublish"  open-type="getUserInfo">
- 快速发布
+  发布
 </button>
-

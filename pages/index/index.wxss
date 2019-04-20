@@ -70,6 +70,8 @@
   text-align: center;
 }
 .find {
+  padding-left: 28rpx;
+  padding-right: 28rpx;
   width: 110rpx;
   height: 110rpx;
   line-height: 45rpx;
@@ -77,10 +79,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  position: sticky;
+  position: fixed;
   bottom: 10%;
-  left: 90%;
-  background-color: rgba(43, 200, 221, 0.849);
+  left: 80%;
+  background-color: rgba(251,114,153, 0.849);
   color: #fff;
   font-size: 10pt;
 }

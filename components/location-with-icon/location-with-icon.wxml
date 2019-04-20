@@ -1,1 +1,4 @@
-<view class="location my-class">{{location}}</view>
+<view class="locate">
+<view class="before"></view>
+<view class="location my-class" catchtap="showMap">{{location}}</view>
+</view>

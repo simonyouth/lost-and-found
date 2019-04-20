@@ -1,4 +1,4 @@
-// components/location-with-icon/location-with-icon.js
+import { qqmap } from '../../utils/util'
 Component({
   externalClasses: ['my-class'],
   /**
@@ -6,19 +6,26 @@ Component({
    */
   properties: {
     location: String,
+    hasEvent: Boolean,
   },
-
-  /**
-   * 组件的初始数据
-   */
-  data: {
-
-  },
-
-  /**
-   * 组件的方法列表
-   */
   methods: {
+    // 根据location显示地理位置
+    showMap() {
+      if (!this.data.hasEvent) {
+        qqmap.geocoder({
+          address: this.data.location,
+          success: ({result}) => {
+            console.log(result)
+            wx.openLocation({
+              longitude: result.location.lng,
+              latitude: result.location.lat,
+            })
+          }
+        })
+      } else {
+        this.triggerEvent('tap')
+      }
 
+    },
   }
-})
+});
