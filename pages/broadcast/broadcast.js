@@ -53,7 +53,7 @@ Page({
           const pages = getCurrentPages();
           const prev = pages[pages.length - 2];
           const list = { ...prev.data.data };
-          list.msgList = res.data.list;
+          list.msgList = res.data.list.msgList;
           prev.setData({
             data: list,
           });

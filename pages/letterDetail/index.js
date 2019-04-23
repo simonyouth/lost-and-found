@@ -70,7 +70,6 @@ Page({
         receiver,
       }
     }).then(res => {
-      console.log(res)
       const { list } = res.data;
       this.setData({
         list,
@@ -113,6 +112,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
     let { data, receiver } = options;
     receiver = JSON.parse(options.receiver);
     const {  _id, nickName } = receiver;

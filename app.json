@@ -8,7 +8,8 @@
     "pages/letter/letter",
     "pages/letterDetail/index",
     "pages/publish/index",
-    "pages/publishType/index"
+    "pages/publishType/index",
+    "pages/personPost/index"
   ],
   "permission": {
     "scope.userLocation": {
