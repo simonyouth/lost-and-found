@@ -64,6 +64,7 @@ App({
     }
   },
   onHide() {
+    console.log('app hide')
     this.globalData.localSocket && this.globalData.localSocket.close();
   },
   globalData: {

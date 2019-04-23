@@ -19,17 +19,14 @@
     <view class="line" />
 
     <view class="hor-icon-action">
-      <view class="icon-action">
-        <icon type="success" size="23"/>
-        <text class="icon-offset">我找回的</text>
-      </view>
-      <view class="icon-action">
+      <view class="icon-action" bindtap="handleAbout" data-type="publish">
         <icon type="success" size="23"/>
         <text class="icon-offset">我发布的</text>
       </view>
-      <view class="icon-action">
+
+      <view class="icon-action" bindtap="handleAbout" data-type="star">
         <icon type="success" size="23"/>
-        <text class="icon-offset">我关注的</text>
+        <text class="icon-offset">我收藏的</text>
       </view>
     </view>
   </view>
