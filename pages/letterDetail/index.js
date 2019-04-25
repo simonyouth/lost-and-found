@@ -1,4 +1,5 @@
 import { httpRequest, uploadImg } from '../../utils/request';
+import cloneDeep from 'lodash.clonedeep';
 const app = getApp();
 
 Page({
@@ -8,6 +9,7 @@ Page({
     list: [],
     message: String,
     receiver: '',
+    currentId: app.globalData.id,
   },
 
   // 发送图片，本地相册或者拍摄上传
@@ -43,8 +45,8 @@ Page({
   send(options = {}) {
     const { imgUrls, msgType } = options;
     const { message, receiver } = this.data;
+
     if (imgUrls || message) {
-      // 发送消息
       httpRequest({
         url: 'letter/send',
         data: {
@@ -62,6 +64,7 @@ Page({
     }
   },
 
+  // 获取私信
   getMessage(options) {
     const { receiver } = this.data;
     httpRequest({
@@ -70,7 +73,9 @@ Page({
         receiver,
       }
     }).then(res => {
+      // 成功
       const { list } = res.data;
+      // 清空输入框
       this.setData({
         list,
         message: '',
@@ -112,13 +117,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
+
     let { data, receiver } = options;
     receiver = JSON.parse(options.receiver);
     const {  _id, nickName } = receiver;
 
     if (data) {
       data = JSON.parse(options.data);
+
       this.setData({
         list: data,
         scrollTop: data.length * 100,
@@ -127,6 +133,7 @@ Page({
 
     this.setData({
       receiver: _id,
+      currentId: app.globalData.id,
     }, () => {
       !data ? this.getMessage() : '';
       this.hasRead();
@@ -137,8 +144,22 @@ Page({
     });
 
     // ws监听
-    app.globalData.localSocket.onMessage(data => {
-      this.getMessage()
+    app.globalData.localSocket.onMessage(msg => {
+      const data = JSON.parse(msg.data);
+      const { creator } = data;
+      const { receiver, list } = this.data;
+      if (creator._id === receiver) {
+        const temp = cloneDeep(list);
+        // JSON.stringify会将所有都toString()，导致数组变成了string
+        temp.push({
+          ...data,
+          content: data.type === 'image' ? data.content.split(',') : data.content,
+        });
+        this.setData({
+          list: temp,
+          scrollTop: temp.length * 100,
+        })
+      }
     })
   },
 });

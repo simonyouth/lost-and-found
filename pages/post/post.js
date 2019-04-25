@@ -75,13 +75,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(app.globalData)
+    // console.log(app.globalData)
     const { data } = options;
     this.setData({
       data: JSON.parse(data),
       id: app.globalData.id
     });
-    console.log(JSON.parse(data))
+    // console.log(JSON.parse(data))
   },
 
   /**

@@ -69,16 +69,8 @@ export function initWs(id) {
     })
   });
 
-  ws.onMessage(res => {
-    console.log(res)
-  });
-
   ws.onClose(res => {
     console.error('...end.........')
-    wx.sendSocketMessage({
-      data: JSON.stringify({ close: true, id})
-    })
   });
-console.log(ws)
   return ws;
 }

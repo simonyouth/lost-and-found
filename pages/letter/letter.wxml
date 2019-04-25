@@ -14,7 +14,7 @@
           <view class="content overflow-text">{{item.content}}</view>
         </view>
       </view>
-      <!-- 编辑个人信息 -->
+      <!-- 时间 -->
       <view class="normal-font">
         {{item.createTime}}
       </view>

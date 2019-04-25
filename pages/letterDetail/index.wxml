@@ -3,17 +3,18 @@
    scrollTop="{{scrollTop}}"
    style="height: {{scrollHeight}}"
 >
-<view class="chat" wx:for="{{list}}">
-  <view wx:if="{{receiver !== item.receiver._id}}">
+<view class="chat" wx:for="{{list}}" wx:key="{{item.id}}">
+  <!--别人发来的-->
+  <view wx:if="{{currentId == item.receiver._id}}">
     <block wx:if="{{item.type === 'text'}}">
       <view class="bubble ta">
         {{item.content}}
       </view>
     </block>
     <block wx:else>
-      <block wx:for="{{item.content}}" wx:for-item="url">
+      <block wx:for="{{item.content}}" wx:for-item="url" wx:key="{{index}}">
         <view class="bfc">
-          <view class="bubble me">
+          <view class="bubble ta">
             <image src="{{url}}" mode="widthFix" class="img"></image>
           </view>
         </view>
@@ -21,6 +22,7 @@
     </block>
   </view>
 
+  <!-- 本人发送的-->
   <block wx:else>
     <block wx:if="{{item.type === 'text'}}">
       <view class="bfc" >
